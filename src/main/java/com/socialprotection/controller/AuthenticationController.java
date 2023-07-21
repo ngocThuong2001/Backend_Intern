@@ -1,0 +1,42 @@
+package com.socialprotection.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.socialprotection.auth.AuthenticationRequest;
+import com.socialprotection.auth.AuthenticationResponse;
+import com.socialprotection.service.AuthenticationService;
+
+@RestController
+@RequestMapping("/api")
+public class AuthenticationController {
+	@Autowired
+	private AuthenticationService authenticationService;
+
+//	@PostMapping("/login", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/login", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authenticationRequest) {
+		return  ResponseEntity.ok(authenticationService.authenticate(authenticationRequest));
+	}
+
+
+	@GetMapping("/test")
+	public ResponseEntity<String> test() {
+		System.out.println("TEST");
+		return ResponseEntity.ok("Authenticate");
+	}
+	
+	@GetMapping("/admin")
+	public ResponseEntity<String> test1() {
+		System.out.println("ADMIN");
+		return ResponseEntity.ok("ok");
+	}
+
+}
