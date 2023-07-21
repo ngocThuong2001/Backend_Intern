@@ -16,30 +16,30 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employees")
-public class Employees {
+public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int employee_id;
+	private long employee_id;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "person_id")
-	private Persons persons;
+	private Person persons;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id")
-	private Departments departments;
+	private Department departments;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "image_id")
-	private Images images;
+	private Image images;
 
 	private char phone_number;
 
 	private String email;
 
 	@OneToMany(mappedBy = "employees")
-	private List<Jobs> jobs = new ArrayList<>();
+	private List<Job> jobs = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee_child")
 	private List<Children> children = new ArrayList<>();
@@ -52,31 +52,31 @@ public class Employees {
 		this.children = children;
 	}
 
-	public int getEmployee_id() {
+	public long getEmployee_id() {
 		return employee_id;
 	}
 
-	public Persons getPersons() {
+	public Person getPersons() {
 		return persons;
 	}
 
-	public void setPersons(Persons persons) {
+	public void setPersons(Person persons) {
 		this.persons = persons;
 	}
 
-	public Departments getDepartments() {
+	public Department getDepartments() {
 		return departments;
 	}
 
-	public void setDepartments(Departments departments) {
+	public void setDepartments(Department departments) {
 		this.departments = departments;
 	}
 
-	public Images getImages() {
+	public Image getImages() {
 		return images;
 	}
 
-	public void setImages(Images images) {
+	public void setImages(Image images) {
 		this.images = images;
 	}
 
@@ -96,11 +96,11 @@ public class Employees {
 		this.email = email;
 	}
 
-	public List<Jobs> getJobs() {
+	public List<Job> getJobs() {
 		return jobs;
 	}
 
-	public void setJobs(List<Jobs> jobs) {
+	public void setJobs(List<Job> jobs) {
 		this.jobs = jobs;
 	}
 

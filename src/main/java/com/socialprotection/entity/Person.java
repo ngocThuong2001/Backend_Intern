@@ -10,11 +10,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "persons")
-public class Persons {
+public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int person_id;
+	private long person_id;
 
 	@Column(name = "full_name")
 	private String full_name;
@@ -32,7 +32,7 @@ public class Persons {
 	private String nationality;
 
 	@OneToOne(mappedBy = "persons")
-	private Employees employees;
+	private Employee employees;
 
 	@OneToOne(mappedBy = "person_child")
 	private Children children;
@@ -45,15 +45,15 @@ public class Persons {
 		this.children = children;
 	}
 
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 
-	public int getPerson_id() {
+	public long getPerson_id() {
 		return person_id;
 	}
 
@@ -97,7 +97,7 @@ public class Persons {
 		this.nationality = nationality;
 	}
 
-	public Persons(int person_id, String full_name, String first_name, String last_name, String gender,
+	public Person(int person_id, String full_name, String first_name, String last_name, String gender,
 			String nationality) {
 		super();
 		this.person_id = person_id;
@@ -108,7 +108,7 @@ public class Persons {
 		this.nationality = nationality;
 	}
 
-	public Persons() {
+	public Person() {
 		super();
 	}
 

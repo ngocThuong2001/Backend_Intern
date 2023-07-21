@@ -12,19 +12,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "departments")
-public class Departments {
+public class Department {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int department_id;
+	private long department_id;
 	
 	private String department_name;
 	
 	@OneToMany(mappedBy = "departments")
-	private List<Employees> employees = new ArrayList<>();
+	private List<Employee> employees = new ArrayList<>();
 	
 
-	public int getDepartment_id() {
+	public long getDepartment_id() {
 		return department_id;
 	}
 
@@ -40,12 +40,12 @@ public class Departments {
 	
 	
 
-	public List<Employees> getEmployees() {
+	public List<Employee> getEmployees() {
 		return employees;
 	}
 
 
-	public void setEmployees(List<Employees> employees) {
+	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
 	

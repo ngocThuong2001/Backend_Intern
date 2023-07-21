@@ -9,16 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "images")
-public class Images {
+public class Image {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int image_id;
+	private long image_id;
 
 	private String medical_url;
 
 	@OneToOne(mappedBy = "images")
-	private Employees employees;
+	private Employee employees;
 
 	@OneToOne(mappedBy = "image_child")
 	private Children children;
@@ -31,15 +31,15 @@ public class Images {
 		this.children = children;
 	}
 
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 
-	public int getImage_id() {
+	public long getImage_id() {
 		return image_id;
 	}
 

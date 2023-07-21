@@ -13,14 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "jobs")
-public class Jobs {
+public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int job_id;
+	private long job_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	private Employees employees;
+	private Employee employees;
 	
 	
 	
@@ -30,16 +30,16 @@ public class Jobs {
 	
 	private Date to_date;
 
-	public int getJob_id() {
+	public long getJob_id() {
 		return job_id;
 	}
 
 	
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 

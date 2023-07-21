@@ -13,11 +13,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "type_of_orphans")
-public class TypeOfOrphans {
+public class TypeOfOrphan {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int orphan_type_id;
+	private long orphan_type_id;
 	@Column
 	private String orphan_type_name;
 
@@ -26,7 +26,7 @@ public class TypeOfOrphans {
 
 	
 
-	public int getOrphan_type_id() {
+	public long getOrphan_type_id() {
 		return orphan_type_id;
 	}
 

@@ -19,7 +19,7 @@ public class Children {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int child_id;
+	private long child_id;
 	
 	private Date birthday;
 	
@@ -27,19 +27,19 @@ public class Children {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
-    private Persons person_child;
+    private Person person_child;
 	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
-    private Images image_child;
+    private Image image_child;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	private Employees employee_child;
+	private Employee employee_child;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "orphan_type_id")
-	private TypeOfOrphans typeOfOrphans;
+	private TypeOfOrphan typeOfOrphans;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "child_status_id")
@@ -47,16 +47,16 @@ public class Children {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "citizen_id")
-    private CitizenIdentifications citizenId;
+    private CitizenIdentification citizenId;
 	
 	
 
-	public CitizenIdentifications getCitizenId() {
+	public CitizenIdentification getCitizenId() {
 		return citizenId;
 	}
 
 
-	public void setCitizenId(CitizenIdentifications citizenId) {
+	public void setCitizenId(CitizenIdentification citizenId) {
 		this.citizenId = citizenId;
 	}
 
@@ -71,7 +71,7 @@ public class Children {
 	}
 
 
-	public int getChild_id() {
+	public long getChild_id() {
 		return child_id;
 	}
 
@@ -92,35 +92,35 @@ public class Children {
 		this.status = status;
 	}
 
-	public Persons getPerson_child() {
+	public Person getPerson_child() {
 		return person_child;
 	}
 
-	public void setPerson_child(Persons person_child) {
+	public void setPerson_child(Person person_child) {
 		this.person_child = person_child;
 	}
 
-	public Images getImage_child() {
+	public Image getImage_child() {
 		return image_child;
 	}
 
-	public void setImage_child(Images image_child) {
+	public void setImage_child(Image image_child) {
 		this.image_child = image_child;
 	}
 
-	public Employees getEmployee_child() {
+	public Employee getEmployee_child() {
 		return employee_child;
 	}
 
-	public void setEmployee_child(Employees employee_child) {
+	public void setEmployee_child(Employee employee_child) {
 		this.employee_child = employee_child;
 	}
 
-	public TypeOfOrphans getTypeOfOrphans() {
+	public TypeOfOrphan getTypeOfOrphans() {
 		return typeOfOrphans;
 	}
 
-	public void setTypeOfOrphans(TypeOfOrphans typeOfOrphans) {
+	public void setTypeOfOrphans(TypeOfOrphan typeOfOrphans) {
 		this.typeOfOrphans = typeOfOrphans;
 	}
 	
