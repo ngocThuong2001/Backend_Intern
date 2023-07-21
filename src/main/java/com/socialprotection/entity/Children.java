@@ -17,41 +17,47 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "children")
 public class Children {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "child_id")
 	private long childId;
-	
+
 	@Column(name = "birthday")
 	private Date birthDay;
-	
+
 	@Column(name = "status")
 	private char status;
-	
+
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id")
-    private Person personChild;
-	
+	@JoinColumn(name = "person_id")
+	private Person personChild;
+
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "image_id")
-    private Image imageChild;
-	
+	@JoinColumn(name = "image_id")
+	private Image imageChild;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	private Employee employeeChild;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "orphan_type_id")
 	private TypeOfOrphan typeOfOrphans;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "child_status_id")
 	private ChildrenStatus childrenStatus;
-	
+
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "citizen_id")
-    private CitizenIdentification citizenId;
+	@JoinColumn(name = "citizen_id")
+	private CitizenIdentification citizenId;
+
+	@Column(name = "date_in")
+	private Date dateIn;
+
+	@Column(name = "date_out")
+	private Date dateOut;
 
 	public long getChildId() {
 		return childId;
@@ -124,11 +130,21 @@ public class Children {
 	public void setCitizenId(CitizenIdentification citizenId) {
 		this.citizenId = citizenId;
 	}
-	
-	
 
-	
-	
-	
+	public Date getDateIn() {
+		return dateIn;
+	}
+
+	public void setDateIn(Date dateIn) {
+		this.dateIn = dateIn;
+	}
+
+	public Date getDateOut() {
+		return dateOut;
+	}
+
+	public void setDateOut(Date dateOut) {
+		this.dateOut = dateOut;
+	}
 
 }
