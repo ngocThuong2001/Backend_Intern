@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employees")
-public class Employees {
+public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +26,15 @@ public class Employees {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "person_id")
-	private Persons person;
+	private Person person;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id")
-	private Departments departments;
+	private Department departments;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "image_id")
-	private Images images;
+	private Image images;
 
 	@Column(name = "phone_number")
 	private char phoneNumber;
@@ -42,7 +42,7 @@ public class Employees {
 	private String email;
 
 	@OneToMany(mappedBy = "employees")
-	private List<Jobs> jobs = new ArrayList<>();
+	private List<Job> jobs = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employeeChild")
 	private List<Children> children = new ArrayList<>();
@@ -55,27 +55,27 @@ public class Employees {
 //		this.employeeId = employeeId;
 //	}
 
-	public Persons getPerson() {
+	public Person getPerson() {
 		return person;
 	}
 
-	public void setPerson(Persons person) {
+	public void setPerson(Person person) {
 		this.person = person;
 	}
 
-	public Departments getDepartments() {
+	public Department getDepartments() {
 		return departments;
 	}
 
-	public void setDepartments(Departments departments) {
+	public void setDepartments(Department departments) {
 		this.departments = departments;
 	}
 
-	public Images getImages() {
+	public Image getImages() {
 		return images;
 	}
 
-	public void setImages(Images images) {
+	public void setImages(Image images) {
 		this.images = images;
 	}
 
@@ -95,11 +95,11 @@ public class Employees {
 		this.email = email;
 	}
 
-	public List<Jobs> getJobs() {
+	public List<Job> getJobs() {
 		return jobs;
 	}
 
-	public void setJobs(List<Jobs> jobs) {
+	public void setJobs(List<Job> jobs) {
 		this.jobs = jobs;
 	}
 

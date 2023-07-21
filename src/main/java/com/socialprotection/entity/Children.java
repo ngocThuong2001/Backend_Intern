@@ -31,19 +31,19 @@ public class Children {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
-    private Persons personChild;
+    private Person personChild;
 	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
-    private Images imageChild;
+    private Image imageChild;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	private Employees employeeChild;
+	private Employee employeeChild;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "orphan_type_id")
-	private TypeOfOrphans typeOfOrphans;
+	private TypeOfOrphan typeOfOrphans;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "child_status_id")
@@ -51,7 +51,7 @@ public class Children {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "citizen_id")
-    private CitizenIdentifications citizenId;
+    private CitizenIdentification citizenId;
 
 	public long getChildId() {
 		return childId;
@@ -77,35 +77,35 @@ public class Children {
 		this.status = status;
 	}
 
-	public Persons getPersonChild() {
+	public Person getPersonChild() {
 		return personChild;
 	}
 
-	public void setPersonChild(Persons personChild) {
+	public void setPersonChild(Person personChild) {
 		this.personChild = personChild;
 	}
 
-	public Images getImageChild() {
+	public Image getImageChild() {
 		return imageChild;
 	}
 
-	public void setImageChild(Images imageChild) {
+	public void setImageChild(Image imageChild) {
 		this.imageChild = imageChild;
 	}
 
-	public Employees getEmployeeChild() {
+	public Employee getEmployeeChild() {
 		return employeeChild;
 	}
 
-	public void setEmployeeChild(Employees employeeChild) {
+	public void setEmployeeChild(Employee employeeChild) {
 		this.employeeChild = employeeChild;
 	}
 
-	public TypeOfOrphans getTypeOfOrphans() {
+	public TypeOfOrphan getTypeOfOrphans() {
 		return typeOfOrphans;
 	}
 
-	public void setTypeOfOrphans(TypeOfOrphans typeOfOrphans) {
+	public void setTypeOfOrphans(TypeOfOrphan typeOfOrphans) {
 		this.typeOfOrphans = typeOfOrphans;
 	}
 
@@ -117,11 +117,11 @@ public class Children {
 		this.childrenStatus = childrenStatus;
 	}
 
-	public CitizenIdentifications getCitizenId() {
+	public CitizenIdentification getCitizenId() {
 		return citizenId;
 	}
 
-	public void setCitizenId(CitizenIdentifications citizenId) {
+	public void setCitizenId(CitizenIdentification citizenId) {
 		this.citizenId = citizenId;
 	}
 	

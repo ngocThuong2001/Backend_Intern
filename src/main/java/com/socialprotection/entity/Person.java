@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "persons")
-public class Persons {
+public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Persons {
 	private String nationality;
 
 	@OneToOne(mappedBy = "person")
-	private Employees employees;
+	private Employee employees;
 
 	@OneToOne(mappedBy = "personChild")
 	private Children children;
@@ -86,11 +86,11 @@ public class Persons {
 		this.nationality = nationality;
 	}
 
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 

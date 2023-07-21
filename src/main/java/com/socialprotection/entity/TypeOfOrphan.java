@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "type_of_orphans")
-public class TypeOfOrphans {
+public class TypeOfOrphan {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

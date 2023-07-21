@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "images")
-public class Images {
+public class Image {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Images {
 	private String medicalUrl;
 
 	@OneToOne(mappedBy = "images")
-	private Employees employees;
+	private Employee employees;
 
 	@OneToOne(mappedBy = "imageChild")
 	private Children children;
@@ -41,11 +41,11 @@ public class Images {
 		this.medicalUrl = medicalUrl;
 	}
 
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 

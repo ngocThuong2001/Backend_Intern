@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "jobs")
-public class Jobs {
+public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "job_id")
@@ -22,7 +22,7 @@ public class Jobs {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	private Employees employees;
+	private Employee employees;
 	
 	
 	@Column(name = "job_title")
@@ -42,11 +42,11 @@ public class Jobs {
 		this.jobId = jobId;
 	}
 
-	public Employees getEmployees() {
+	public Employee getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Employees employees) {
+	public void setEmployees(Employee employees) {
 		this.employees = employees;
 	}
 

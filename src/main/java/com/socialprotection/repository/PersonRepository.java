@@ -2,8 +2,8 @@ package com.socialprotection.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.socialprotection.entity.Persons;
+import com.socialprotection.entity.Person;
 
-public interface PersonRepository extends JpaRepository<Persons, Integer>{
+public interface PersonRepository extends JpaRepository<Person, Integer>{
 
 }
