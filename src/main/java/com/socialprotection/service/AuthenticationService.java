@@ -13,6 +13,7 @@ import com.socialprotection.entity.Token;
 import com.socialprotection.entity.User;
 import com.socialprotection.repository.TokenRepository;
 import com.socialprotection.repository.UserRepository;
+import com.socialprotection.utils.StatusResponse;
 
 @Service
 public class AuthenticationService {

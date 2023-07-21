@@ -18,13 +18,15 @@ public class HomeController {
 	private UserService userService;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView homePage() {
-		userService.saveRole(new Role("SUPER_ADMIN"));
-		userService.saveRole(new Role("ADMIN"));
+	public void homePage() {
+		Role role = userService.saveRole(new Role("SUPER_ADMIN"));
+		Role role2 = userService.saveRole(new Role("ADMIN"));
 
-		userService.saveUser(new User("super admin", "123456789", new Role(1, "SUPER_ADMIN")));
+		userService.saveUser(new User("SUPERADMIM01", "superadmin@01", role));
+		
+		userService.saveUser(new User("ADMIN01", "admin@01", role2));
 
-		ModelAndView modelAndView = new ModelAndView("home");
-		return modelAndView;
+//		ModelAndView modelAndView = new ModelAndView("home");
+//		return modelAndView;
 	}
 }

@@ -1,5 +1,7 @@
 package com.socialprotection.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity(name = "token")
@@ -27,6 +30,12 @@ public class Token {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	public User user;
+
+	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+	private Timestamp createdAt;
+
+	@Column(name = "modified_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Timestamp modifiedAt;
 
 	public Token() {
 		super();
@@ -87,5 +96,10 @@ public class Token {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@PreUpdate
+	public void setModifiedAt() {
+		this.modifiedAt = new Timestamp(System.currentTimeMillis());
 	}
 }

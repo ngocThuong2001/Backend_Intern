@@ -1,5 +1,7 @@
 package com.socialprotection.entity;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,8 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,6 +43,12 @@ public class User implements UserDetails {
 
 	@OneToMany(mappedBy = "user")
 	private List<Token> tokens;
+
+	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+	private Timestamp createdAt;
+
+	@Column(name = "modified_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Timestamp modifiedAt;
 
 	public User() {
 		super();
@@ -74,7 +85,7 @@ public class User implements UserDetails {
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-	
+
 	public long getUserId() {
 		return userId;
 	}
@@ -127,5 +138,10 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@PreUpdate
+	public void setModifiedAt() {
+		this.modifiedAt = new Timestamp(System.currentTimeMillis());
 	}
 }
