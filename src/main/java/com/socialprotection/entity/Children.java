@@ -3,6 +3,7 @@ package com.socialprotection.entity;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,23 +20,26 @@ public class Children {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int child_id;
+	@Column(name = "child_id")
+	private long childId;
 	
-	private Date birthday;
+	@Column(name = "birthday")
+	private Date birthDay;
 	
+	@Column(name = "status")
 	private char status;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
-    private Persons person_child;
+    private Persons personChild;
 	
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
-    private Images image_child;
+    private Images imageChild;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	private Employees employee_child;
+	private Employees employeeChild;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "orphan_type_id")
@@ -48,40 +52,21 @@ public class Children {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "citizen_id")
     private CitizenIdentifications citizenId;
-	
-	
 
-	public CitizenIdentifications getCitizenId() {
-		return citizenId;
+	public long getChildId() {
+		return childId;
 	}
 
+//	public void setChildId(long childId) {
+//		this.childId = childId;
+//	}
 
-	public void setCitizenId(CitizenIdentifications citizenId) {
-		this.citizenId = citizenId;
+	public Date getBirthDay() {
+		return birthDay;
 	}
 
-
-	public ChildrenStatus getChildrenStatus() {
-		return childrenStatus;
-	}
-
-
-	public void setChildrenStatus(ChildrenStatus childrenStatus) {
-		this.childrenStatus = childrenStatus;
-	}
-
-
-	public int getChild_id() {
-		return child_id;
-	}
-
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
 	}
 
 	public char getStatus() {
@@ -92,28 +77,28 @@ public class Children {
 		this.status = status;
 	}
 
-	public Persons getPerson_child() {
-		return person_child;
+	public Persons getPersonChild() {
+		return personChild;
 	}
 
-	public void setPerson_child(Persons person_child) {
-		this.person_child = person_child;
+	public void setPersonChild(Persons personChild) {
+		this.personChild = personChild;
 	}
 
-	public Images getImage_child() {
-		return image_child;
+	public Images getImageChild() {
+		return imageChild;
 	}
 
-	public void setImage_child(Images image_child) {
-		this.image_child = image_child;
+	public void setImageChild(Images imageChild) {
+		this.imageChild = imageChild;
 	}
 
-	public Employees getEmployee_child() {
-		return employee_child;
+	public Employees getEmployeeChild() {
+		return employeeChild;
 	}
 
-	public void setEmployee_child(Employees employee_child) {
-		this.employee_child = employee_child;
+	public void setEmployeeChild(Employees employeeChild) {
+		this.employeeChild = employeeChild;
 	}
 
 	public TypeOfOrphans getTypeOfOrphans() {
@@ -123,6 +108,26 @@ public class Children {
 	public void setTypeOfOrphans(TypeOfOrphans typeOfOrphans) {
 		this.typeOfOrphans = typeOfOrphans;
 	}
+
+	public ChildrenStatus getChildrenStatus() {
+		return childrenStatus;
+	}
+
+	public void setChildrenStatus(ChildrenStatus childrenStatus) {
+		this.childrenStatus = childrenStatus;
+	}
+
+	public CitizenIdentifications getCitizenId() {
+		return citizenId;
+	}
+
+	public void setCitizenId(CitizenIdentifications citizenId) {
+		this.citizenId = citizenId;
+	}
+	
+	
+
+	
 	
 	
 

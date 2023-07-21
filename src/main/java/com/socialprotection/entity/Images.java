@@ -1,5 +1,6 @@
 package com.socialprotection.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,22 +14,31 @@ public class Images {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int image_id;
-
-	private String medical_url;
+	@Column(name = "image_id")
+	private long imageId;
+	@Column(name = "medical_url")
+	private String medicalUrl;
 
 	@OneToOne(mappedBy = "images")
 	private Employees employees;
 
-	@OneToOne(mappedBy = "image_child")
+	@OneToOne(mappedBy = "imageChild")
 	private Children children;
 
-	public Children getChildren() {
-		return children;
+	public long getImageId() {
+		return imageId;
 	}
 
-	public void setChildren(Children children) {
-		this.children = children;
+//	public void setImageId(long imageId) {
+//		this.imageId = imageId;
+//	}
+
+	public String getMedicalUrl() {
+		return medicalUrl;
+	}
+
+	public void setMedicalUrl(String medicalUrl) {
+		this.medicalUrl = medicalUrl;
 	}
 
 	public Employees getEmployees() {
@@ -39,16 +49,14 @@ public class Images {
 		this.employees = employees;
 	}
 
-	public int getImage_id() {
-		return image_id;
+	public Children getChildren() {
+		return children;
 	}
 
-	public String getMedical_url() {
-		return medical_url;
+	public void setChildren(Children children) {
+		this.children = children;
 	}
 
-	public void setMedical_url(String medical_url) {
-		this.medical_url = medical_url;
-	}
+	
 
 }

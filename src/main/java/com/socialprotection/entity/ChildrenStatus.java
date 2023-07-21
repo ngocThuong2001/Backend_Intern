@@ -18,7 +18,7 @@ public class ChildrenStatus {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "child_status_id")
-	private int childStatusId;
+	private long childStatusId;
 	
 	@Column(name = "status")
 	private String status;
@@ -26,7 +26,7 @@ public class ChildrenStatus {
 	@OneToMany(mappedBy = "childrenStatus")
 	private List<Children> child = new ArrayList<>();
 
-	public int getChildStatusId() {
+	public long getChildStatusId() {
 		return childStatusId;
 	}
 

@@ -3,6 +3,7 @@ package com.socialprotection.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,11 +21,12 @@ public class Employees {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int employee_id;
+	@Column(name = "employee_id")
+	private long employeeId;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "person_id")
-	private Persons persons;
+	private Persons person;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id")
@@ -34,34 +36,31 @@ public class Employees {
 	@JoinColumn(name = "image_id")
 	private Images images;
 
-	private char phone_number;
+	@Column(name = "phone_number")
+	private char phoneNumber;
 
 	private String email;
 
 	@OneToMany(mappedBy = "employees")
 	private List<Jobs> jobs = new ArrayList<>();
 
-	@OneToMany(mappedBy = "employee_child")
+	@OneToMany(mappedBy = "employeeChild")
 	private List<Children> children = new ArrayList<>();
 
-	public List<Children> getChildren() {
-		return children;
+	public long getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setChildren(List<Children> children) {
-		this.children = children;
+//	public void setEmployeeId(long employeeId) {
+//		this.employeeId = employeeId;
+//	}
+
+	public Persons getPerson() {
+		return person;
 	}
 
-	public int getEmployee_id() {
-		return employee_id;
-	}
-
-	public Persons getPersons() {
-		return persons;
-	}
-
-	public void setPersons(Persons persons) {
-		this.persons = persons;
+	public void setPerson(Persons person) {
+		this.person = person;
 	}
 
 	public Departments getDepartments() {
@@ -80,12 +79,12 @@ public class Employees {
 		this.images = images;
 	}
 
-	public char getPhone_number() {
-		return phone_number;
+	public char getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone_number(char phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(char phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {
@@ -103,5 +102,15 @@ public class Employees {
 	public void setJobs(List<Jobs> jobs) {
 		this.jobs = jobs;
 	}
+
+	public List<Children> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Children> children) {
+		this.children = children;
+	}
+
+	
 
 }
