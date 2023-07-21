@@ -2,6 +2,7 @@ package com.socialprotection.entity;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,25 +17,31 @@ import javax.persistence.Table;
 public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long job_id;
+	@Column(name = "job_id")
+	private long jobId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	private Employee employees;
 	
 	
+	@Column(name = "job_title")
+	private String jobTitle;
 	
-	private String job_title;
+	@Column(name = "from_date")
+	private Date fromDate;
 	
-	private Date from_date;
-	
-	private Date to_date;
+	@Column(name = "to_date")
+	private Date toDate;
 
-	public long getJob_id() {
-		return job_id;
+	public long getJobId() {
+		return jobId;
 	}
 
-	
+	public void setJobId(long jobId) {
+		this.jobId = jobId;
+	}
+
 	public Employee getEmployees() {
 		return employees;
 	}
@@ -43,29 +50,31 @@ public class Job {
 		this.employees = employees;
 	}
 
-	public String getJob_title() {
-		return job_title;
+	public String getJobTitle() {
+		return jobTitle;
 	}
 
-	public void setJob_title(String job_title) {
-		this.job_title = job_title;
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 
-	public Date getFrom_date() {
-		return from_date;
+	public Date getFromDate() {
+		return fromDate;
 	}
 
-	public void setFrom_date(Date from_date) {
-		this.from_date = from_date;
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
 	}
 
-	public Date getTo_date() {
-		return to_date;
+	public Date getToDate() {
+		return toDate;
 	}
 
-	public void setTo_date(Date to_date) {
-		this.to_date = to_date;
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
 	}
+
+	
 	
 	
 

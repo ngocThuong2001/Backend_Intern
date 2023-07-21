@@ -3,6 +3,7 @@ package com.socialprotection.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,29 +17,39 @@ public class Department {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long department_id;
+	@Column(name = "department_id")
+	private long departmentId;
 	
-	private String department_name;
+	@Column(name = "department_name")
+	private String departmentName;
 	
 	@OneToMany(mappedBy = "departments")
 	private List<Employee> employees = new ArrayList<>();
 	
 
-	public long getDepartment_id() {
-		return department_id;
-	}
-
-	
-
-	public String getDepartment_name() {
-		return department_name;
-	}
-
-	public void setDepartment_name(String department_name) {
-		this.department_name = department_name;
-	}
 	
 	
+	
+
+	public long getDepartmentId() {
+		return departmentId;
+	}
+
+
+//	public void setDepartmentId(long departmentId) {
+//		this.departmentId = departmentId;
+//	}
+
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
 
 	public List<Employee> getEmployees() {
 		return employees;

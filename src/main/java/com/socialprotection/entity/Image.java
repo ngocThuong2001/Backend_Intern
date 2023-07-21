@@ -1,5 +1,6 @@
 package com.socialprotection.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,15 +14,42 @@ public class Image {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long image_id;
-
-	private String medical_url;
+	@Column(name = "image_id")
+	private long imageId;
+	@Column(name = "image_url")
+	private String imageUrl;
 
 	@OneToOne(mappedBy = "images")
 	private Employee employees;
 
-	@OneToOne(mappedBy = "image_child")
+	@OneToOne(mappedBy = "imageChild")
 	private Children children;
+
+	public long getImageId() {
+		return imageId;
+	}
+
+//	public void setImageId(long imageId) {
+//		this.imageId = imageId;
+//	}
+
+
+
+	public Employee getEmployees() {
+		return employees;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public void setEmployees(Employee employees) {
+		this.employees = employees;
+	}
 
 	public Children getChildren() {
 		return children;
@@ -31,24 +59,6 @@ public class Image {
 		this.children = children;
 	}
 
-	public Employee getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(Employee employees) {
-		this.employees = employees;
-	}
-
-	public long getImage_id() {
-		return image_id;
-	}
-
-	public String getMedical_url() {
-		return medical_url;
-	}
-
-	public void setMedical_url(String medical_url) {
-		this.medical_url = medical_url;
-	}
+	
 
 }
