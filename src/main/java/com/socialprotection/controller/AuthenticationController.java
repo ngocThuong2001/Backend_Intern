@@ -18,8 +18,7 @@ import com.socialprotection.service.AuthenticationService;
 public class AuthenticationController {
 	@Autowired
 	private AuthenticationService authenticationService;
-
-//	@PostMapping("/login", produces = MediaType.APPLICATION_JSON_VALUE)
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authenticationRequest) {
@@ -31,12 +30,6 @@ public class AuthenticationController {
 	public ResponseEntity<String> test() {
 		System.out.println("TEST");
 		return ResponseEntity.ok("Authenticate");
-	}
-	
-	@GetMapping("/admin")
-	public ResponseEntity<String> test1() {
-		System.out.println("ADMIN");
-		return ResponseEntity.ok("ok");
 	}
 
 }

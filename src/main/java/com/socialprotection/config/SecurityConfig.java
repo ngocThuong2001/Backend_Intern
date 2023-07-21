@@ -33,7 +33,6 @@ public class SecurityConfig {
 		http.authorizeRequests().antMatchers("/home").permitAll();
 		http.authorizeRequests().antMatchers("/api/login").permitAll();
 		http.authorizeRequests().antMatchers("/api/test").authenticated();
-		http.authorizeRequests().antMatchers("/api/admin").authenticated();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authenticationProvider(authenticationProvider);
 		http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
