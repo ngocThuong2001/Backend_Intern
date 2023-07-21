@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="persistence-data">
+        <class>com.socialprotection.entity.Accounts</class>
+        <class>com.socialprotection.entity.Persons</class>
+        <class>com.socialprotection.entity.Address</class>
+        <class>com.socialprotection.entity.AddressType</class>
+        <class>com.socialprotection.entity.Images</class>
+        <class>com.socialprotection.entity.Departments</class>
+        <class>com.socialprotection.entity.Employees</class>
+        <class>com.socialprotection.entity.Jobs</class>
+        <class>com.socialprotection.entity.TypeOfOrphans</class>
+        <class>com.socialprotection.entity.Children</class>
+        <class>com.socialprotection.entity.ChildrenStatus</class>
+        <class>com.socialprotection.entity.CitizenIdentifications</class>
+    </persistence-unit>
+</persistence>

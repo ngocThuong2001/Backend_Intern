@@ -3,7 +3,7 @@ package com.socialprotection.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.socialprotection.model.AddressType;
+import com.socialprotection.entity.AddressType;
 import com.socialprotection.repository.AddressTypeRepository;
 
 @Service
