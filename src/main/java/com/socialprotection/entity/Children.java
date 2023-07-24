@@ -36,7 +36,7 @@ public class Children extends Person{
 	@Column(name = "birthday")
 	private Date birthDay;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "image_id")
 	private Image image;
 
@@ -44,7 +44,7 @@ public class Children extends Person{
 	@JoinColumn(name = "employee_id")
 	private Employee employeeChild;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orphan_type_id")
 	private TypeOfOrphan typeOfOrphans;
 

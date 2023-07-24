@@ -8,6 +8,7 @@ import com.socialprotection.entity.ChildrenStatus;
 import com.socialprotection.entity.TypeOfOrphan;
 import com.socialprotection.repository.ChildrenRepository;
 import com.socialprotection.repository.ChildrenStatusRepository;
+import com.socialprotection.repository.ImageRepository;
 import com.socialprotection.repository.TypeOfOrphanRepopsitory;
 import com.socialprotection.service.ChildrenService;
 
@@ -21,9 +22,13 @@ public class ChildrenServiceImpl implements ChildrenService{
 	
 	@Autowired 
 	private TypeOfOrphanRepopsitory typeOfOrphanRepopsitory;
+	
+	@Autowired
+	private ImageRepository imageRepository;
 
 	@Override
 	public Children save(Children children) {
+		imageRepository.save(children.getImage());
 		return childrenRepository.save(children);
 	}
 
