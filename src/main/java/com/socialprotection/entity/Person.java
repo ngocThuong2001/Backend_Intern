@@ -37,11 +37,9 @@ public class Person {
 
 	@OneToOne(mappedBy = "personChild")
 	private Children children;
-	
+
 	@OneToOne(mappedBy = "person")
 	private Adopter adopter;
-	
-	
 
 	public Adopter getAdopter() {
 		return adopter;
@@ -50,6 +48,9 @@ public class Person {
 	public void setAdopter(Adopter adopter) {
 		this.adopter = adopter;
 	}
+
+	@OneToOne(mappedBy = "personDonor")
+	private Donor donor;
 
 	public long getPersonId() {
 		return personId;
@@ -132,6 +133,12 @@ public class Person {
 		super();
 	}
 
-	
+	public Donor getDonor() {
+		return donor;
+	}
+
+	public void setDonor(Donor donor) {
+		this.donor = donor;
+	}
 
 }
