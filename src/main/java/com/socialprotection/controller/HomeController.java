@@ -18,10 +18,12 @@ public class HomeController {
 	public void homePage() {
 		Role role = userService.saveRole(new Role("SUPER_ADMIN"));
 		Role role2 = userService.saveRole(new Role("ADMIN"));
+		Role role3 = userService.saveRole(new Role("WEB_ADMIN"));
 
 		userService.saveUser(new User("SUPERADMIM01", "superadmin@01", role));
 		
 		userService.saveUser(new User("ADMIN01", "admin@01", role2));
+		userService.saveUser(new User("ADMIN03", "admin@03", role3));
 
 //		ModelAndView modelAndView = new ModelAndView("home");
 //		return modelAndView;

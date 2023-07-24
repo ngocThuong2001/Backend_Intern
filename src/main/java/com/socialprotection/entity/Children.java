@@ -1,6 +1,7 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,7 +37,7 @@ public class Children {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "image_id")
-	private Image imageChild;
+	private Image image;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
@@ -53,6 +55,9 @@ public class Children {
 	@JoinColumn(name = "citizen_id")
 	private CitizenIdentification citizenId;
 
+	@OneToMany(mappedBy = "child")
+	private List<MedicalRecord> medicalRecords;
+
 	@Column(name = "date_in")
 	private Date dateIn;
 
@@ -63,9 +68,9 @@ public class Children {
 		return childId;
 	}
 
-//	public void setChildId(long childId) {
-//		this.childId = childId;
-//	}
+	public void setChildId(long childId) {
+		this.childId = childId;
+	}
 
 	public Date getBirthDay() {
 		return birthDay;
@@ -91,12 +96,12 @@ public class Children {
 		this.personChild = personChild;
 	}
 
-	public Image getImageChild() {
-		return imageChild;
+	public Image getImage() {
+		return image;
 	}
 
-	public void setImageChild(Image imageChild) {
-		this.imageChild = imageChild;
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	public Employee getEmployeeChild() {
@@ -145,6 +150,14 @@ public class Children {
 
 	public void setDateOut(Date dateOut) {
 		this.dateOut = dateOut;
+	}
+
+	public List<MedicalRecord> getMedicalRecords() {
+		return medicalRecords;
+	}
+
+	public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
+		this.medicalRecords = medicalRecords;
 	}
 
 }

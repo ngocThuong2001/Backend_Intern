@@ -28,13 +28,9 @@ public class Employee {
 	@JoinColumn(name = "person_id")
 	private Person person;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "department_id")
-	private Department departments;
-
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "image_id")
-	private Image images;
+	private Image image;
 
 	@Column(name = "phone_number")
 	private char phoneNumber;
@@ -63,20 +59,12 @@ public class Employee {
 		this.person = person;
 	}
 
-	public Department getDepartments() {
-		return departments;
+	public Image getImage() {
+		return image;
 	}
 
-	public void setDepartments(Department departments) {
-		this.departments = departments;
-	}
-
-	public Image getImages() {
-		return images;
-	}
-
-	public void setImages(Image images) {
-		this.images = images;
+	public void setImages(Image image) {
+		this.image = image;
 	}
 
 	public char getPhoneNumber() {
@@ -110,7 +98,5 @@ public class Employee {
 	public void setChildren(List<Children> children) {
 		this.children = children;
 	}
-
-	
 
 }

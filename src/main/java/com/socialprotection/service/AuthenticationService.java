@@ -34,7 +34,7 @@ public class AuthenticationService {
 		String refreshToken = jwtService.generateRefreshToken(user);
 		revokeAllUserTokens(user);
 		saveUserToken(user, jwtToken);
-		return new AuthenticationResponse(user.getUsername(), jwtToken);
+		return new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole().getRoleName());
 	}
 
 	private void revokeAllUserTokens(User user) {

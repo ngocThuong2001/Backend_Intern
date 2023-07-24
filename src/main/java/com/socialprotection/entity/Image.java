@@ -16,14 +16,18 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "image_id")
 	private long imageId;
+	
 	@Column(name = "image_url")
 	private String imageUrl;
 
-	@OneToOne(mappedBy = "images")
-	private Employee employees;
+	@OneToOne(mappedBy = "image")
+	private Employee employee;
 
-	@OneToOne(mappedBy = "imageChild")
+	@OneToOne(mappedBy = "image")
 	private Children children;
+	
+	@OneToOne(mappedBy = "image")
+	private Article	article;
 
 	public long getImageId() {
 		return imageId;
@@ -35,8 +39,8 @@ public class Image {
 
 
 
-	public Employee getEmployees() {
-		return employees;
+	public Employee getEmployee() {
+		return employee;
 	}
 
 	public String getImageUrl() {
@@ -47,8 +51,8 @@ public class Image {
 		this.imageUrl = imageUrl;
 	}
 
-	public void setEmployees(Employee employees) {
-		this.employees = employees;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public Children getChildren() {

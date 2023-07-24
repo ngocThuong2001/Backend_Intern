@@ -17,12 +17,20 @@ public class AuthenticationResponse {
 	private String userName;
 	@JsonProperty("access_token")
 	private String token;
+	@JsonProperty("role")
+	private String role;
+
 	public AuthenticationResponse(String userName, String token) {
 		super();
 		this.userName = userName;
 		this.token = token;
 	}
 
-
+	public AuthenticationResponse(String userName, String token, String role) {
+		super();
+		this.userName = userName;
+		this.token = token;
+		this.role = role;
+	}
 
 }

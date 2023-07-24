@@ -39,6 +39,9 @@ public class User implements UserDetails {
 	private Role role;
 
 	@OneToMany(mappedBy = "user")
+	private List<Article> articles;
+	
+	@OneToMany(mappedBy = "user")
 	private List<Token> tokens;
 
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
