@@ -1,5 +1,5 @@
 package com.socialprotection.service;
 
-public interface PersonService {
+public interface SalaryService {
 
 }
