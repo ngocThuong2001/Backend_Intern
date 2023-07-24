@@ -49,6 +49,16 @@ public class TypeOfOrphan {
 		this.children = children;
 	}
 
+	public TypeOfOrphan(String orphanTypeName, List<Children> children) {
+		super();
+		this.orphanTypeName = orphanTypeName;
+		this.children = children;
+	}
+
+	public TypeOfOrphan() {
+		super();
+	}
+
 	
 
 	

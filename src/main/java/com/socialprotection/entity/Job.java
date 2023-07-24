@@ -28,11 +28,7 @@ public class Job {
 	@Column(name = "job_title")
 	private String jobTitle;
 	
-	@Column(name = "from_date")
-	private Date fromDate;
 	
-	@Column(name = "to_date")
-	private Date toDate;
 
 	public long getJobId() {
 		return jobId;
@@ -58,21 +54,17 @@ public class Job {
 		this.jobTitle = jobTitle;
 	}
 
-	public Date getFromDate() {
-		return fromDate;
+	public Job(Employee employees, String jobTitle) {
+		super();
+		this.employees = employees;
+		this.jobTitle = jobTitle;
 	}
 
-	public void setFromDate(Date fromDate) {
-		this.fromDate = fromDate;
+	public Job() {
+		super();
 	}
 
-	public Date getToDate() {
-		return toDate;
-	}
-
-	public void setToDate(Date toDate) {
-		this.toDate = toDate;
-	}
+	
 
 	
 	

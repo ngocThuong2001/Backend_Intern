@@ -59,6 +59,17 @@ public class Image {
 		this.children = children;
 	}
 
+	public Image(String imageUrl, Employee employees, Children children) {
+		super();
+		this.imageUrl = imageUrl;
+		this.employees = employees;
+		this.children = children;
+	}
+
+	public Image() {
+		super();
+	}
+
 	
 
 }

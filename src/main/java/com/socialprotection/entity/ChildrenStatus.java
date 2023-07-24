@@ -49,6 +49,16 @@ public class ChildrenStatus {
 	public void setChild(List<Children> child) {
 		this.child = child;
 	}
+
+	public ChildrenStatus(String status, List<Children> child) {
+		super();
+		this.status = status;
+		this.child = child;
+	}
+
+	public ChildrenStatus() {
+		super();
+	}
 	
 	
 

@@ -33,6 +33,19 @@ public class CitizenIdentification {
 	
 	@OneToOne(mappedBy = "citizenId")
     private Children children;
+	
+	@OneToOne(mappedBy = "citizenIdentification")
+    private Adopter adopter;
+	
+	
+
+	public Adopter getAdopter() {
+		return adopter;
+	}
+
+	public void setAdopter(Adopter adopter) {
+		this.adopter = adopter;
+	}
 
 	public long getCitizenId() {
 		return citizenId;
@@ -80,6 +93,21 @@ public class CitizenIdentification {
 
 	public void setChildren(Children children) {
 		this.children = children;
+	}
+
+	public CitizenIdentification(char citizenIdentNumber, Date issueDate, String issuePlace, Date expireDate,
+			Children children, Adopter adopter) {
+		super();
+		this.citizenIdentNumber = citizenIdentNumber;
+		this.issueDate = issueDate;
+		this.issuePlace = issuePlace;
+		this.expireDate = expireDate;
+		this.children = children;
+		this.adopter = adopter;
+	}
+
+	public CitizenIdentification() {
+		super();
 	}
 	
 	
