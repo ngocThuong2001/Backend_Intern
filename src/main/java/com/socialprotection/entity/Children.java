@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "children")
 public class Children {
@@ -29,12 +32,13 @@ public class Children {
 	@Column(name = "child_id")
 	private long childId;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "birthday")
 	private Date birthDay;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "person_id")
-	private Person personChild;
+	private Person person;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "image_id")
@@ -59,9 +63,11 @@ public class Children {
 	@OneToMany(mappedBy = "child")
 	private List<MedicalRecord> medicalRecords;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "date_in")
 	private Date dateIn;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "date_out")
 	private Date dateOut;
 
@@ -117,12 +123,12 @@ public class Children {
 		this.birthDay = birthDay;
 	}
 
-	public Person getPersonChild() {
-		return personChild;
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setPersonChild(Person personChild) {
-		this.personChild = personChild;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public Image getImage() {
@@ -189,12 +195,12 @@ public class Children {
 		this.medicalRecords = medicalRecords;
 	}
 
-	public Children(Date birthDay, Person personChild, Image image, Employee employeeChild, TypeOfOrphan typeOfOrphans,
+	public Children(Date birthDay, Person person, Image image, Employee employeeChild, TypeOfOrphan typeOfOrphans,
 			ChildrenStatus childrenStatus, CitizenIdentification citizenId, Date dateIn, Date dateOut,
 			Set<Activity> activities, List<Adoption> adoptions, AdoptionHistory adoptionHistory) {
 		super();
 		this.birthDay = birthDay;
-		this.personChild = personChild;
+		this.person = person;
 		this.image = image;
 		this.employeeChild = employeeChild;
 		this.typeOfOrphans = typeOfOrphans;

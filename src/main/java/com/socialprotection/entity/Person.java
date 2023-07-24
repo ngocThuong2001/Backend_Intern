@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -32,14 +34,21 @@ public class Person {
 	@Column(name = "nationality")
 	private String nationality;
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@OneToOne(mappedBy = "person")
 	private Employee employees;
 
-	@OneToOne(mappedBy = "personChild")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@OneToOne(mappedBy = "person")
 	private Children children;
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@OneToOne(mappedBy = "person")
 	private Adopter adopter;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@OneToOne(mappedBy = "personDonor")
+	private Donor donor;
 
 	public Adopter getAdopter() {
 		return adopter;
@@ -48,9 +57,6 @@ public class Person {
 	public void setAdopter(Adopter adopter) {
 		this.adopter = adopter;
 	}
-
-	@OneToOne(mappedBy = "personDonor")
-	private Donor donor;
 
 	public long getPersonId() {
 		return personId;
@@ -100,6 +106,7 @@ public class Person {
 		this.nationality = nationality;
 	}
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	public Employee getEmployees() {
 		return employees;
 	}
@@ -116,17 +123,13 @@ public class Person {
 		this.children = children;
 	}
 
-	public Person(String fullName, String firstName, String lastName, String gender, String nationality,
-			Employee employees, Children children, Adopter adopter) {
+	public Person(String fullName, String firstName, String lastName, String gender, String nationality) {
 		super();
 		this.fullName = fullName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.nationality = nationality;
-		this.employees = employees;
-		this.children = children;
-		this.adopter = adopter;
 	}
 
 	public Person() {
@@ -139,6 +142,12 @@ public class Person {
 
 	public void setDonor(Donor donor) {
 		this.donor = donor;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [personId=" + personId + ", fullName=" + fullName + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", gender=" + gender + ", nationality=" + nationality + "]";
 	}
 
 }

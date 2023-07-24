@@ -25,14 +25,27 @@ public class ChildrenStatus {
 	
 	@OneToMany(mappedBy = "childrenStatus")
 	private List<Children> child = new ArrayList<>();
+	
+	@Column(name = "description", columnDefinition = "TEXT")
+	private String description;
+	
+	public ChildrenStatus(String status,String description) {
+		super();
+		this.status = status;
+		this.description = description;
+	}
+
+	public ChildrenStatus() {
+		super();
+	}
 
 	public long getChildStatusId() {
 		return childStatusId;
 	}
 
-//	public void setChildStatusId(int childStatusId) {
-//		this.childStatusId = childStatusId;
-//	}
+	public void setChildStatusId(int childStatusId) {
+		this.childStatusId = childStatusId;
+	}
 
 	public String getStatus() {
 		return status;
@@ -50,15 +63,7 @@ public class ChildrenStatus {
 		this.child = child;
 	}
 
-	public ChildrenStatus(String status, List<Children> child) {
-		super();
-		this.status = status;
-		this.child = child;
-	}
 
-	public ChildrenStatus() {
-		super();
-	}
 	
 	
 
