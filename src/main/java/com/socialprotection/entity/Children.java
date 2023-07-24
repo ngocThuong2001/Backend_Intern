@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "children")
 public class Children extends Person{
@@ -29,6 +32,7 @@ public class Children extends Person{
 	@Column(name = "child_id")
 	private long childId;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "birthday")
 	private Date birthDay;
 
@@ -55,9 +59,11 @@ public class Children extends Person{
 	@OneToMany(mappedBy = "child")
 	private List<MedicalRecord> medicalRecords;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "date_in")
 	private Date dateIn;
 
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "date_out")
 	private Date dateOut;
 
