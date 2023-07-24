@@ -1,5 +1,7 @@
 package com.socialprotection.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +42,10 @@ public class ChildrenServiceImpl implements ChildrenService{
 	@Override
 	public ChildrenStatus saveChildrenStatus(ChildrenStatus childrenStatus) {
 		return childrenStatusRepository.save(childrenStatus);
+	}
+
+	@Override
+	public List<Children> fildAll() {
+		return childrenRepository.findAll();
 	}
 }

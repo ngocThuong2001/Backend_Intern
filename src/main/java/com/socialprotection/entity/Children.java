@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "children")
@@ -42,13 +43,13 @@ public class Children extends Person{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	private Employee employeeChild;
+	private Employee employee;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orphan_type_id")
 	private TypeOfOrphan typeOfOrphans;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "child_status_id")
 	private ChildrenStatus childrenStatus;
 
@@ -57,6 +58,7 @@ public class Children extends Person{
 	private CitizenIdentification citizenId;
 
 	@OneToMany(mappedBy = "child")
+	@JsonIgnore
 	private List<MedicalRecord> medicalRecords;
 
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
@@ -71,12 +73,15 @@ public class Children extends Person{
 	@JoinTable(name = "child_activities", joinColumns = {
 			@JoinColumn(name = "child_id", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "activity_id", nullable = false) })
+	@JsonIgnore
 	private Set<Activity> activities = new HashSet<>();
 
 	@OneToMany(mappedBy = "children")
+	@JsonIgnore
 	private List<Adoption> adoptions = new ArrayList<>();
 
 	@OneToOne(mappedBy = "children")
+	@JsonIgnore
 	private AdoptionHistory adoptionHistory;
 
 	public AdoptionHistory getAdoptionHistory() {
@@ -128,12 +133,12 @@ public class Children extends Person{
 		this.image = image;
 	}
 
-	public Employee getEmployeeChild() {
-		return employeeChild;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeChild(Employee employeeChild) {
-		this.employeeChild = employeeChild;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public TypeOfOrphan getTypeOfOrphans() {
@@ -190,7 +195,7 @@ public class Children extends Person{
 		super();
 		this.birthDay = birthDay;
 		this.image = image;
-		this.employeeChild = employeeChild;
+		this.employee = employeeChild;
 		this.typeOfOrphans = typeOfOrphans;
 		this.childrenStatus = childrenStatus;
 		this.citizenId = citizenId;

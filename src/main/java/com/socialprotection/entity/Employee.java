@@ -42,7 +42,7 @@ public class Employee extends Person{
 	@OneToMany(mappedBy = "employees")
 	private List<Job> jobs;
 
-	@OneToMany(mappedBy = "employeeChild")
+	@OneToMany(mappedBy = "employee")
 	private List<Children> children;
 
 	@OneToMany(mappedBy = "empSalary")
