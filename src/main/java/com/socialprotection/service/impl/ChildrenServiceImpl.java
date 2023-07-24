@@ -3,6 +3,9 @@ package com.socialprotection.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.socialprotection.entity.Children;
+import com.socialprotection.entity.ChildrenStatus;
+import com.socialprotection.entity.TypeOfOrphan;
 import com.socialprotection.repository.ChildrenRepository;
 import com.socialprotection.repository.ChildrenStatusRepository;
 import com.socialprotection.repository.TypeOfOrphanRepopsitory;
@@ -18,4 +21,19 @@ public class ChildrenServiceImpl implements ChildrenService{
 	
 	@Autowired 
 	private TypeOfOrphanRepopsitory typeOfOrphanRepopsitory;
+
+	@Override
+	public Children save(Children children) {
+		return childrenRepository.save(children);
+	}
+
+	@Override
+	public TypeOfOrphan saveTypeOrphan(TypeOfOrphan typeOfOrphan) {
+		return typeOfOrphanRepopsitory.save(typeOfOrphan);
+	}
+
+	@Override
+	public ChildrenStatus saveChildrenStatus(ChildrenStatus childrenStatus) {
+		return childrenStatusRepository.save(childrenStatus);
+	}
 }
