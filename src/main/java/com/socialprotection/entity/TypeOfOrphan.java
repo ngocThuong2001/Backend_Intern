@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "type_of_orphans")
 public class TypeOfOrphan {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orphan_type_id")
@@ -25,13 +25,32 @@ public class TypeOfOrphan {
 	@OneToMany(mappedBy = "typeOfOrphans")
 	private List<Children> children = new ArrayList<>();
 
+	@Column(name = "description", columnDefinition = "TEXT")
+	private String description;
+
+	public TypeOfOrphan(String orphanTypeName, String description) {
+		super();
+		this.orphanTypeName = orphanTypeName;
+		this.description = description;
+	}
+
+	public TypeOfOrphan(String orphanTypeName, List<Children> children) {
+		super();
+		this.orphanTypeName = orphanTypeName;
+		this.children = children;
+	}
+
+	public TypeOfOrphan() {
+		super();
+	}
+
 	public long getOrphanTypeId() {
 		return orphanTypeId;
 	}
 
-//	public void setOrphanTypeId(long orphanTypeId) {
-//		this.orphanTypeId = orphanTypeId;
-//	}
+	public void setOrphanTypeId(long orphanTypeId) {
+		this.orphanTypeId = orphanTypeId;
+	}
 
 	public String getOrphanTypeName() {
 		return orphanTypeName;
@@ -49,20 +68,4 @@ public class TypeOfOrphan {
 		this.children = children;
 	}
 
-	public TypeOfOrphan(String orphanTypeName, List<Children> children) {
-		super();
-		this.orphanTypeName = orphanTypeName;
-		this.children = children;
-	}
-
-	public TypeOfOrphan() {
-		super();
-	}
-
-	
-
-	
-	
-	
-	
 }
