@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+=======
+com\socialprotection\controller\HomeController.class
+com\socialprotection\repository\AddressTypeRepository.class
+com\socialprotection\model\AddressType.class
+com\socialprotection\service\AddressTypeService.class
+>>>>>>> refs/remotes/origin/tahongtu
