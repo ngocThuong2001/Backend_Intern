@@ -41,7 +41,7 @@ public class Donor {
 	@Column(name = "expiration_date")
 	private Date expirationDate;
 	
-	@OneToOne(mappedBy = "donation")
+	@OneToOne(mappedBy = "donor")
 	private Donation donation;
 	
 	public Donor() {

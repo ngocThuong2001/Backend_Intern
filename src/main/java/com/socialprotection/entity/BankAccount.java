@@ -1,5 +1,7 @@
 package com.socialprotection.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,33 +18,31 @@ public class BankAccount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "bank_account_id")
 	private long bankAccountId;
-	
+
 	@Column(name = "account_number")
 	private String accountNumber;
-	
+
 	@Column(name = "account_name")
 	private String accountName;
-	
+
 	@Column(name = "balance")
 	private float balance;
-	
-	@OneToMany(mappedBy = "income_id")
-	private Income income;
-	
-	@OneToMany(mappedBy = "expense_id")
-	private Expense expense;
-	
+
+	@OneToMany(mappedBy = "bankAccount")
+	private List<Income> incomes;
+
+	@OneToMany(mappedBy = "bankAccount")
+	private List<Expense> expenses;
+
 	public BankAccount() {
 		super();
 	}
 
-	public BankAccount(String accountNumber, String accountName, float balance, Income income, Expense expense) {
+	public BankAccount(String accountNumber, String accountName, float balance) {
 		super();
 		this.accountNumber = accountNumber;
 		this.accountName = accountName;
 		this.balance = balance;
-		this.income = income;
-		this.expense = expense;
 	}
 
 	public String getAccountNumber() {
@@ -69,20 +69,4 @@ public class BankAccount {
 		this.balance = balance;
 	}
 
-	public Income getIncome() {
-		return income;
-	}
-
-	public void setIncome(Income income) {
-		this.income = income;
-	}
-
-	public Expense getExpense() {
-		return expense;
-	}
-
-	public void setExpense(Expense expense) {
-		this.expense = expense;
-	}
-	
 }

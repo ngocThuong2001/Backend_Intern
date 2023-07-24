@@ -1,6 +1,7 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,38 +19,36 @@ public class Budget {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "budget_id")
 	private long budgetId;
-	
+
 	@Column(name = "budget_name")
 	private String budgetName;
-	
+
 	@Column(name = "budget_description")
 	private String budgetDescription;
-	
+
 	@Column(name = "amount")
 	private float amout;
-	
+
 	@Column(name = "start_date")
 	private Date startDate;
-	
+
 	@Column(name = "end_date")
 	private Date endDate;
 
-	@OneToMany(mappedBy = "donation")
-	private Donation donation;
-	
+	@OneToMany(mappedBy = "budget")
+	private List<Donation> donations;
+
 	public Budget() {
 		super();
 	}
 
-	public Budget(String budgetName, String budgetDescription, float amout, Date startDate, Date endDate,
-			Donation donation) {
+	public Budget(String budgetName, String budgetDescription, float amout, Date startDate, Date endDate) {
 		super();
 		this.budgetName = budgetName;
 		this.budgetDescription = budgetDescription;
 		this.amout = amout;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.donation = donation;
 	}
 
 	public String getBudgetName() {
@@ -92,12 +91,4 @@ public class Budget {
 		this.endDate = endDate;
 	}
 
-	public Donation getDonation() {
-		return donation;
-	}
-
-	public void setDonation(Donation donation) {
-		this.donation = donation;
-	}
-	
 }
