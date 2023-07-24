@@ -1,5 +1,6 @@
 package com.socialprotection.entity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,7 +24,7 @@ public class Employee {
 	@Column(name = "employee_id")
 	private long employeeId;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "person_id")
 	private Person person;
 
@@ -37,11 +37,50 @@ public class Employee {
 
 	private String email;
 
+	@Column(name = "from_date")
+	private Date fromDate;
+
+	@Column(name = "to_date")
+	private Date toDate;
+
 	@OneToMany(mappedBy = "employees")
 	private List<Job> jobs = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employeeChild")
 	private List<Children> children = new ArrayList<>();
+
+	@OneToMany(mappedBy = "empSalary")
+	private List<Salary> salaries = new ArrayList<Salary>();
+
+	@OneToOne(mappedBy = "empAct")
+	private Activity activity;
+
+	@OneToMany(mappedBy = "employee")
+	private List<Shift> shift = new ArrayList<>();
+
+	public List<Shift> getShift() {
+		return shift;
+	}
+
+	public void setShift(List<Shift> shift) {
+		this.shift = shift;
+	}
+
+	public Activity getActivity() {
+		return activity;
+	}
+
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
+	public List<Salary> getSalaries() {
+		return salaries;
+	}
+
+	public void setSalaries(List<Salary> salaries) {
+		this.salaries = salaries;
+	}
 
 	public long getEmployeeId() {
 		return employeeId;
@@ -97,6 +136,42 @@ public class Employee {
 
 	public void setChildren(List<Children> children) {
 		this.children = children;
+	}
+
+	public Date getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public Date getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
+
+	public Employee(Person person, Image image, char phoneNumber, String email, Date fromDate, Date toDate,
+			List<Job> jobs, List<Children> children, List<Salary> salaries, Activity activity, List<Shift> shift) {
+		super();
+		this.person = person;
+		this.image = image;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.jobs = jobs;
+		this.children = children;
+		this.salaries = salaries;
+		this.activity = activity;
+		this.shift = shift;
+	}
+
+	public Employee() {
+		super();
 	}
 
 }

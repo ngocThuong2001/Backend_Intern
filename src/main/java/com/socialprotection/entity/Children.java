@@ -1,8 +1,10 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -27,9 +31,6 @@ public class Children {
 
 	@Column(name = "birthday")
 	private Date birthDay;
-
-	@Column(name = "status")
-	private char status;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "person_id")
@@ -64,6 +65,42 @@ public class Children {
 	@Column(name = "date_out")
 	private Date dateOut;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "child_activities", joinColumns = {
+			@JoinColumn(name = "child_id", nullable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "activity_id", nullable = false) })
+	private Set<Activity> activities = new HashSet<>();
+
+	@OneToMany(mappedBy = "children")
+	private List<Adoption> adoptions = new ArrayList<>();
+
+	@OneToOne(mappedBy = "children")
+	private AdoptionHistory adoptionHistory;
+
+	public AdoptionHistory getAdoptionHistory() {
+		return adoptionHistory;
+	}
+
+	public void setAdoptionHistory(AdoptionHistory adoptionHistory) {
+		this.adoptionHistory = adoptionHistory;
+	}
+
+	public List<Adoption> getAdoptions() {
+		return adoptions;
+	}
+
+	public void setAdoptions(List<Adoption> adoptions) {
+		this.adoptions = adoptions;
+	}
+
+	public Set<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
+	}
+
 	public long getChildId() {
 		return childId;
 	}
@@ -78,14 +115,6 @@ public class Children {
 
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
-	}
-
-	public char getStatus() {
-		return status;
-	}
-
-	public void setStatus(char status) {
-		this.status = status;
 	}
 
 	public Person getPersonChild() {
@@ -158,6 +187,28 @@ public class Children {
 
 	public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
 		this.medicalRecords = medicalRecords;
+	}
+
+	public Children(Date birthDay, Person personChild, Image image, Employee employeeChild, TypeOfOrphan typeOfOrphans,
+			ChildrenStatus childrenStatus, CitizenIdentification citizenId, Date dateIn, Date dateOut,
+			Set<Activity> activities, List<Adoption> adoptions, AdoptionHistory adoptionHistory) {
+		super();
+		this.birthDay = birthDay;
+		this.personChild = personChild;
+		this.image = image;
+		this.employeeChild = employeeChild;
+		this.typeOfOrphans = typeOfOrphans;
+		this.childrenStatus = childrenStatus;
+		this.citizenId = citizenId;
+		this.dateIn = dateIn;
+		this.dateOut = dateOut;
+		this.activities = activities;
+		this.adoptions = adoptions;
+		this.adoptionHistory = adoptionHistory;
+	}
+
+	public Children() {
+		super();
 	}
 
 }

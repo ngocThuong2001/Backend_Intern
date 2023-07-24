@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "persons")
+@Table(name = "person")
 public class Person {
 
 	@Id
@@ -37,6 +37,19 @@ public class Person {
 
 	@OneToOne(mappedBy = "personChild")
 	private Children children;
+	
+	@OneToOne(mappedBy = "person")
+	private Adopter adopter;
+	
+	
+
+	public Adopter getAdopter() {
+		return adopter;
+	}
+
+	public void setAdopter(Adopter adopter) {
+		this.adopter = adopter;
+	}
 
 	public long getPersonId() {
 		return personId;
@@ -100,6 +113,23 @@ public class Person {
 
 	public void setChildren(Children children) {
 		this.children = children;
+	}
+
+	public Person(String fullName, String firstName, String lastName, String gender, String nationality,
+			Employee employees, Children children, Adopter adopter) {
+		super();
+		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.nationality = nationality;
+		this.employees = employees;
+		this.children = children;
+		this.adopter = adopter;
+	}
+
+	public Person() {
+		super();
 	}
 
 	
