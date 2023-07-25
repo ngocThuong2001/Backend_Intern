@@ -28,8 +28,8 @@ public class Employee extends Person {
 	@JoinColumn(name = "image_id")
 	private Image image;
 
-	@Column(name = "phone_number")
-	private char phoneNumber;
+	@Column(name = "phone_number", columnDefinition = "char(10)")
+	private String phoneNumber;
 
 	private String email;
 
@@ -56,7 +56,7 @@ public class Employee extends Person {
 	private List<Shift> shift;
 
 	public Employee(String fullName, String firstName, String lastName, String gender, String nationality,
-			String addressPermanent, String addressTemporary, char phoneNumber, String email, Date fromDate,
+			String addressPermanent, String addressTemporary, String phoneNumber, String email, Date fromDate,
 			Date toDate) {
 		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
 		this.phoneNumber = phoneNumber;
@@ -109,11 +109,11 @@ public class Employee extends Person {
 		this.image = image;
 	}
 
-	public char getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(char phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -160,7 +160,5 @@ public class Employee extends Person {
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
 	}
-
-
 
 }

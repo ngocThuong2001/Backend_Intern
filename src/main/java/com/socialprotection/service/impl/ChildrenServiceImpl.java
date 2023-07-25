@@ -44,7 +44,12 @@ public class ChildrenServiceImpl implements ChildrenService {
 	}
 
 	@Override
-	public List<Children> fildAll() {
+	public List<Children> findAll() {
 		return childrenRepository.findAll();
+	}
+
+	@Override
+	public Children findById(long id) {
+		return childrenRepository.findOne(id);
 	}
 }
