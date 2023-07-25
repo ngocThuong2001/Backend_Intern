@@ -50,11 +50,12 @@ public class Adopter extends Person {
 	@JoinColumn(name = "citizen_ident_id")
 	private CitizenIdentification citizenIdentification;
 
-	@OneToMany(mappedBy = "adopter")
-	private List<Adoption> adoptions = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "adoption_id")
+	private Adoption adoption;
 
 	@OneToMany(mappedBy = "adopter")
-	private List<AdoptionHistory> adoptionHistory = new ArrayList<>();
+	private List<AdoptionHistory> adoptionHistory;
 
 	
 
@@ -70,12 +71,14 @@ public class Adopter extends Person {
 		this.adoptionHistory = adoptionHistory;
 	}
 
-	public List<Adoption> getAdoptions() {
-		return adoptions;
+	
+
+	public Adoption getAdoption() {
+		return adoption;
 	}
 
-	public void setAdoptions(List<Adoption> adoptions) {
-		this.adoptions = adoptions;
+	public void setAdoption(Adoption adoption) {
+		this.adoption = adoption;
 	}
 
 	public long getAdopterId() {
@@ -150,10 +153,12 @@ public class Adopter extends Person {
 		this.citizenIdentification = citizenIdentification;
 	}
 
-	public Adopter(Date bithday, char phoneNumber, String email, String nation, String occupation, float income,
-			String relationship, CitizenIdentification citizenIdentification, List<Adoption> adoptions,
-			List<AdoptionHistory> adoptionHistory) {
-		super();
+	
+
+	public Adopter(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, Date bithday, char phoneNumber, String email,
+			String nation, String occupation, float income, String relationship) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
 		this.bithday = bithday;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
@@ -161,9 +166,6 @@ public class Adopter extends Person {
 		this.occupation = occupation;
 		this.income = income;
 		this.relationship = relationship;
-		this.citizenIdentification = citizenIdentification;
-		this.adoptions = adoptions;
-		this.adoptionHistory = adoptionHistory;
 	}
 
 	public Adopter() {

@@ -40,8 +40,12 @@ public class Employee extends Person {
 	@Column(name = "to_date")
 	private Date toDate;
 
-	@OneToMany(mappedBy = "employees")
-	private List<Job> jobs;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "job_id")
+	private Job job;
+	
+	
 
 	@OneToMany(mappedBy = "employee")
 	private List<Children> children;
@@ -113,12 +117,14 @@ public class Employee extends Person {
 		this.email = email;
 	}
 
-	public List<Job> getJobs() {
-		return jobs;
+	
+
+	public Job getJob() {
+		return job;
 	}
 
-	public void setJobs(List<Job> jobs) {
-		this.jobs = jobs;
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	public List<Children> getChildren() {
@@ -149,19 +155,16 @@ public class Employee extends Person {
 		this.toDate = toDate;
 	}
 
-	public Employee(Image image, char phoneNumber, String email, Date fromDate, Date toDate, List<Job> jobs,
-			List<Children> children, List<Salary> salaries, Activity activity, List<Shift> shift) {
-		super();
-		this.image = image;
+	
+
+	public Employee(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, char phoneNumber, String email, Date fromDate,
+			Date toDate) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
-		this.jobs = jobs;
-		this.children = children;
-		this.salaries = salaries;
-		this.activity = activity;
-		this.shift = shift;
 	}
 
 	public Employee() {
