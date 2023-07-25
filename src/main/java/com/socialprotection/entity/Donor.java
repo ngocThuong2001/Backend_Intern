@@ -15,16 +15,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "donors")
-public class Donor {
+public class Donor extends Person{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "donor_id")
 	private long donorId;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "person_id")
-	private Person personDonor;
 	
 	@Column(name = "account_name")
 	private String accountName;
@@ -48,24 +44,15 @@ public class Donor {
 		super();
 	}
 
-	public Donor(Person personDonor, String accountName, String accountNumber, String bankName, String bankCvv,
+	public Donor(String accountName, String accountNumber, String bankName, String bankCvv,
 			Date expirationDate, Donation donation) {
 		super();
-		this.personDonor = personDonor;
 		this.accountName = accountName;
 		this.accountNumber = accountNumber;
 		this.bankName = bankName;
 		this.bankCvv = bankCvv;
 		this.expirationDate = expirationDate;
 		this.donation = donation;
-	}
-
-	public Person getPersonDonor() {
-		return personDonor;
-	}
-
-	public void setPersonDonor(Person personDonor) {
-		this.personDonor = personDonor;
 	}
 
 	public String getAccountName() {

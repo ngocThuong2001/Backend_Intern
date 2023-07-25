@@ -1,11 +1,19 @@
 package com.socialprotection.service;
 
+import java.util.List;
+
 import com.socialprotection.entity.Children;
 import com.socialprotection.entity.ChildrenStatus;
 import com.socialprotection.entity.TypeOfOrphan;
 
 public interface ChildrenService {
-	Children save(Children children);
-	TypeOfOrphan saveTypeOrphan(TypeOfOrphan typeOfOrphan);
-	ChildrenStatus saveChildrenStatus(ChildrenStatus childrenStatus);
+//	Save children
+	public Children save(Children children);
+
+	public TypeOfOrphan saveTypeOrphan(TypeOfOrphan typeOfOrphan);
+
+	public ChildrenStatus saveChildrenStatus(ChildrenStatus childrenStatus);
+
+//	Select children
+	public List<Children> fildAll();
 }

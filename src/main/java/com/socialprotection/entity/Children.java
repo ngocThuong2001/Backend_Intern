@@ -22,37 +22,34 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "children")
-public class Children {
+public class Children extends Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "child_id")
 	private long childId;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "birthday")
 	private Date birthDay;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "person_id")
-	private Person person;
-
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "image_id")
 	private Image image;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
-	private Employee employeeChild;
+	private Employee employee;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orphan_type_id")
 	private TypeOfOrphan typeOfOrphans;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "child_status_id")
 	private ChildrenStatus childrenStatus;
 
@@ -61,13 +58,14 @@ public class Children {
 	private CitizenIdentification citizenId;
 
 	@OneToMany(mappedBy = "child")
+	@JsonIgnore
 	private List<MedicalRecord> medicalRecords;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "date_in")
 	private Date dateIn;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "date_out")
 	private Date dateOut;
 
@@ -75,12 +73,15 @@ public class Children {
 	@JoinTable(name = "child_activities", joinColumns = {
 			@JoinColumn(name = "child_id", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "activity_id", nullable = false) })
+	@JsonIgnore
 	private Set<Activity> activities = new HashSet<>();
 
 	@OneToMany(mappedBy = "children")
+	@JsonIgnore
 	private List<Adoption> adoptions = new ArrayList<>();
 
 	@OneToOne(mappedBy = "children")
+	@JsonIgnore
 	private AdoptionHistory adoptionHistory;
 
 	public AdoptionHistory getAdoptionHistory() {
@@ -123,13 +124,6 @@ public class Children {
 		this.birthDay = birthDay;
 	}
 
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
 
 	public Image getImage() {
 		return image;
@@ -139,12 +133,12 @@ public class Children {
 		this.image = image;
 	}
 
-	public Employee getEmployeeChild() {
-		return employeeChild;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeChild(Employee employeeChild) {
-		this.employeeChild = employeeChild;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public TypeOfOrphan getTypeOfOrphans() {
@@ -195,14 +189,13 @@ public class Children {
 		this.medicalRecords = medicalRecords;
 	}
 
-	public Children(Date birthDay, Person person, Image image, Employee employeeChild, TypeOfOrphan typeOfOrphans,
+	public Children(Date birthDay, Image image, Employee employeeChild, TypeOfOrphan typeOfOrphans,
 			ChildrenStatus childrenStatus, CitizenIdentification citizenId, Date dateIn, Date dateOut,
 			Set<Activity> activities, List<Adoption> adoptions, AdoptionHistory adoptionHistory) {
 		super();
 		this.birthDay = birthDay;
-		this.person = person;
 		this.image = image;
-		this.employeeChild = employeeChild;
+		this.employee = employeeChild;
 		this.typeOfOrphans = typeOfOrphans;
 		this.childrenStatus = childrenStatus;
 		this.citizenId = citizenId;

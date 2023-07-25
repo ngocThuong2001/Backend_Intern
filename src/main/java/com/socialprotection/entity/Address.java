@@ -117,6 +117,4 @@ public class Address {
 		this.modifiedAt = modifiedAt;
 	}
 
-	
-	
 }

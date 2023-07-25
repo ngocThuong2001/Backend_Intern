@@ -1,6 +1,5 @@
 package com.socialprotection.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "type_of_orphans")
@@ -22,8 +23,9 @@ public class TypeOfOrphan {
 	@Column(name = "orphan_type_name")
 	private String orphanTypeName;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "typeOfOrphans")
-	private List<Children> children = new ArrayList<>();
+	private List<Children> children;
 
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
@@ -32,12 +34,6 @@ public class TypeOfOrphan {
 		super();
 		this.orphanTypeName = orphanTypeName;
 		this.description = description;
-	}
-
-	public TypeOfOrphan(String orphanTypeName, List<Children> children) {
-		super();
-		this.orphanTypeName = orphanTypeName;
-		this.children = children;
 	}
 
 	public TypeOfOrphan() {
