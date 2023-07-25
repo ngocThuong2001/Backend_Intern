@@ -1,9 +1,9 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "adopters")
@@ -25,11 +29,12 @@ public class Adopter extends Person {
 	@Column(name = "adopter_id")
 	private long adopterId;
 
-	@Column(name = "bithday")
-	private Date bithday;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@Column(name = "birthday")
+	private Date birthday;
 
-	@Column(name = "phone_number")
-	private char phoneNumber;
+	@Column(name = "phone_number", columnDefinition = "Char(10)")
+	private String phoneNumber;
 
 	@Column(name = "email")
 	private String email;
@@ -46,16 +51,19 @@ public class Adopter extends Person {
 	@Column(name = "relationship")
 	private String relationship;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "citizen_ident_id")
 	private CitizenIdentification citizenIdentification;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "adoption_id")
+	@JoinColumn(name = "adoption_id", updatable = true, insertable = true)
 	private Adoption adoption;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "adopter")
 	private List<AdoptionHistory> adoptionHistory;
+
 
 	
 
@@ -89,19 +97,19 @@ public class Adopter extends Person {
 //		this.adopterId = adopterId;
 //	}
 
-	public Date getBithday() {
-		return bithday;
+	public Date getBirthday() {
+		return birthday;
 	}
 
-	public void setBithday(Date bithday) {
-		this.bithday = bithday;
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
-	public char getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(char phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -156,10 +164,10 @@ public class Adopter extends Person {
 	
 
 	public Adopter(String fullName, String firstName, String lastName, String gender, String nationality,
-			String addressPermanent, String addressTemporary, Date bithday, char phoneNumber, String email,
+			String addressPermanent, String addressTemporary, Date birthday, String phoneNumber, String email,
 			String nation, String occupation, float income, String relationship) {
 		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
-		this.bithday = bithday;
+		this.birthday = birthday;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.nation = nation;
