@@ -88,17 +88,7 @@ public class Children extends Person {
 	@JsonIgnore
 	private List<Guardian> guardians;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private Address address;
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	
 
 	public List<Guardian> getGuardians() {
 		return guardians;

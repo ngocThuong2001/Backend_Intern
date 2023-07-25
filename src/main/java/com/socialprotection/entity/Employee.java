@@ -55,17 +55,7 @@ public class Employee extends Person {
 	@OneToMany(mappedBy = "employee")
 	private List<Shift> shift;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private Address address;
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	
 
 	public List<Shift> getShift() {
 		return shift;

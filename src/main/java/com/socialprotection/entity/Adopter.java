@@ -56,17 +56,7 @@ public class Adopter extends Person {
 	@OneToMany(mappedBy = "adopter")
 	private List<AdoptionHistory> adoptionHistory = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private Address address;
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	
 
 	public void setAdopterId(long adopterId) {
 		this.adopterId = adopterId;

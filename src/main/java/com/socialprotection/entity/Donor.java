@@ -41,9 +41,7 @@ public class Donor extends Person {
 	@OneToOne(mappedBy = "donor")
 	private Donation donation;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private Address address;
+	
 
 	public long getDonorId() {
 		return donorId;
@@ -53,13 +51,7 @@ public class Donor extends Person {
 		this.donorId = donorId;
 	}
 
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	
 
 	public Donor() {
 		super();

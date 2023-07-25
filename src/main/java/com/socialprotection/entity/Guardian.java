@@ -30,17 +30,7 @@ public class Guardian extends Person {
 	@JoinColumn(name = "child_id")
 	private Children children;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private Address address;
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	
 
 	public long getGuardianID() {
 		return guardianID;
@@ -74,11 +64,14 @@ public class Guardian extends Person {
 		this.children = children;
 	}
 
-	public Guardian(String fullName, String firstName, String lastName, String gender, String nationality,
-			String phoneNumber, String email) {
-		super(fullName, firstName, lastName, gender, nationality);
+	
+
+	
+	public Guardian(String phoneNumber, String email, Children children) {
+		super();
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.children = children;
 	}
 
 	public Guardian() {
