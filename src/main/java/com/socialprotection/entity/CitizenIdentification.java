@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "citizen_identification")
 public class CitizenIdentification {
@@ -22,18 +25,22 @@ public class CitizenIdentification {
 	@Column(name = "citizen_ident_number", columnDefinition = "Char(12)")
 	private String citizenIdentNumber;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "issue_date")
 	private Date issueDate;
 	
 	@Column(name = "issue_place")
 	private String issuePlace;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "expire_date")
 	private Date expireDate;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "citizenId")
     private Children children;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "citizenIdentification")
     private Adopter adopter;
 	
