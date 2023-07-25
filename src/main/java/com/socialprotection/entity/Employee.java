@@ -11,22 +11,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee extends Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_id")
 	private long employeeId;
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "person_id")
-	private Person person;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "image_id")
@@ -44,19 +41,31 @@ public class Employee {
 	private Date toDate;
 
 	@OneToMany(mappedBy = "employees")
-	private List<Job> jobs = new ArrayList<>();
+	private List<Job> jobs;
 
-	@OneToMany(mappedBy = "employeeChild")
-	private List<Children> children = new ArrayList<>();
+	@OneToMany(mappedBy = "employee")
+	private List<Children> children;
 
 	@OneToMany(mappedBy = "empSalary")
-	private List<Salary> salaries = new ArrayList<Salary>();
+	private List<Salary> salaries;
 
 	@OneToOne(mappedBy = "empAct")
 	private Activity activity;
 
 	@OneToMany(mappedBy = "employee")
-	private List<Shift> shift = new ArrayList<>();
+	private List<Shift> shift;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "address_id")
+	private Address address;
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public List<Shift> getShift() {
 		return shift;
@@ -86,16 +95,8 @@ public class Employee {
 		return employeeId;
 	}
 
-//	public void setEmployeeId(long employeeId) {
-//		this.employeeId = employeeId;
-//	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setEmployeeId(long employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	public Image getImage() {
@@ -134,6 +135,10 @@ public class Employee {
 		return children;
 	}
 
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
 	public void setChildren(List<Children> children) {
 		this.children = children;
 	}
@@ -154,10 +159,9 @@ public class Employee {
 		this.toDate = toDate;
 	}
 
-	public Employee(Person person, Image image, char phoneNumber, String email, Date fromDate, Date toDate,
-			List<Job> jobs, List<Children> children, List<Salary> salaries, Activity activity, List<Shift> shift) {
+	public Employee(Image image, char phoneNumber, String email, Date fromDate, Date toDate, List<Job> jobs,
+			List<Children> children, List<Salary> salaries, Activity activity, List<Shift> shift) {
 		super();
-		this.person = person;
 		this.image = image;
 		this.phoneNumber = phoneNumber;
 		this.email = email;

@@ -1,21 +1,10 @@
 package com.socialprotection.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Table(name = "person")
+@MappedSuperclass
 public class Person {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "person_id")
-	private long personId;
 
 	@Column(name = "full_name")
 	private String fullName;
@@ -32,33 +21,20 @@ public class Person {
 	@Column(name = "nationality")
 	private String nationality;
 
-	@OneToOne(mappedBy = "person")
-	private Employee employees;
 
-	@OneToOne(mappedBy = "personChild")
-	private Children children;
-
-	@OneToOne(mappedBy = "person")
-	private Adopter adopter;
-
-	public Adopter getAdopter() {
-		return adopter;
+	public Person(String fullName, String firstName, String lastName, String gender, String nationality) {
+		super();
+		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.nationality = nationality;
 	}
 
-	public void setAdopter(Adopter adopter) {
-		this.adopter = adopter;
+	public Person() {
+		super();
 	}
 
-	@OneToOne(mappedBy = "personDonor")
-	private Donor donor;
-
-	public long getPersonId() {
-		return personId;
-	}
-
-//	public void setPersonId(long personId) {
-//		this.personId = personId;
-//	}
 
 	public String getFullName() {
 		return fullName;
@@ -100,45 +76,7 @@ public class Person {
 		this.nationality = nationality;
 	}
 
-	public Employee getEmployees() {
-		return employees;
-	}
 
-	public void setEmployees(Employee employees) {
-		this.employees = employees;
-	}
 
-	public Children getChildren() {
-		return children;
-	}
-
-	public void setChildren(Children children) {
-		this.children = children;
-	}
-
-	public Person(String fullName, String firstName, String lastName, String gender, String nationality,
-			Employee employees, Children children, Adopter adopter) {
-		super();
-		this.fullName = fullName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.gender = gender;
-		this.nationality = nationality;
-		this.employees = employees;
-		this.children = children;
-		this.adopter = adopter;
-	}
-
-	public Person() {
-		super();
-	}
-
-	public Donor getDonor() {
-		return donor;
-	}
-
-	public void setDonor(Donor donor) {
-		this.donor = donor;
-	}
 
 }

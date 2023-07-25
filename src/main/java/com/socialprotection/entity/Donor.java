@@ -10,62 +10,70 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "donors")
-public class Donor {
-	
+public class Donor extends Person {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "donor_id")
 	private long donorId;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "person_id")
-	private Person personDonor;
-	
 	@Column(name = "account_name")
 	private String accountName;
-	
+
 	@Column(name = "account_number")
 	private String accountNumber;
-	
+
 	@Column(name = "bank_name")
 	private String bankName;
-	
+
 	@Column(name = "bank_cvv")
 	private String bankCvv;
-	
+
 	@Column(name = "expiration_date")
 	private Date expirationDate;
-	
+
 	@OneToOne(mappedBy = "donor")
 	private Donation donation;
-	
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "address_id")
+	private Address address;
+
+	public long getDonorId() {
+		return donorId;
+	}
+
+	public void setDonorId(long donorId) {
+		this.donorId = donorId;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public Donor() {
 		super();
 	}
 
-	public Donor(Person personDonor, String accountName, String accountNumber, String bankName, String bankCvv,
-			Date expirationDate, Donation donation) {
+	public Donor(String accountName, String accountNumber, String bankName, String bankCvv, Date expirationDate,
+			Donation donation) {
 		super();
-		this.personDonor = personDonor;
 		this.accountName = accountName;
 		this.accountNumber = accountNumber;
 		this.bankName = bankName;
 		this.bankCvv = bankCvv;
 		this.expirationDate = expirationDate;
 		this.donation = donation;
-	}
-
-	public Person getPersonDonor() {
-		return personDonor;
-	}
-
-	public void setPersonDonor(Person personDonor) {
-		this.personDonor = personDonor;
 	}
 
 	public String getAccountName() {
@@ -115,5 +123,5 @@ public class Donor {
 	public void setDonation(Donation donation) {
 		this.donation = donation;
 	}
-	
+
 }

@@ -11,57 +11,66 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "adopters")
-public class Adopter {
-	
+public class Adopter extends Person {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "adopter_id")
 	private long adopterId;
-	
+
 	@Column(name = "bithday")
 	private Date bithday;
-	
-	@Column(name = "phone_number", columnDefinition = "char(10)")
-	private String phoneNumber;
-	
+
+	@Column(name = "phone_number")
+	private char phoneNumber;
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "nation")
 	private String nation;
-	
+
 	@Column(name = "accupation")
 	private String occupation;
-	
+
 	@Column(name = "income")
 	private float income;
-	
+
 	@Column(name = "relationship")
 	private String relationship;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "citizen_ident_id")
 	private CitizenIdentification citizenIdentification;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "person_id")
-	private Person person;
-	
-	
+
 	@OneToMany(mappedBy = "adopter")
 	private List<Adoption> adoptions = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "adopter")
 	private List<AdoptionHistory> adoptionHistory = new ArrayList<>();
-	
-	
-	
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "address_id")
+	private Address address;
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public void setAdopterId(long adopterId) {
+		this.adopterId = adopterId;
+	}
 
 	public List<AdoptionHistory> getAdoptionHistory() {
 		return adoptionHistory;
@@ -95,11 +104,11 @@ public class Adopter {
 		this.bithday = bithday;
 	}
 
-	public String getPhoneNumber() {
+	public char getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(char phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -151,16 +160,9 @@ public class Adopter {
 		this.citizenIdentification = citizenIdentification;
 	}
 
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	public Adopter(Date bithday, String phoneNumber, String email, String nation, String occupation, float income,
-			String relationship) {
+	public Adopter(Date bithday, char phoneNumber, String email, String nation, String occupation, float income,
+			String relationship, CitizenIdentification citizenIdentification, List<Adoption> adoptions,
+			List<AdoptionHistory> adoptionHistory) {
 		super();
 		this.bithday = bithday;
 		this.phoneNumber = phoneNumber;
@@ -169,13 +171,13 @@ public class Adopter {
 		this.occupation = occupation;
 		this.income = income;
 		this.relationship = relationship;
-		
+		this.citizenIdentification = citizenIdentification;
+		this.adoptions = adoptions;
+		this.adoptionHistory = adoptionHistory;
 	}
 
 	public Adopter() {
 		super();
 	}
-	
-	
 
 }
