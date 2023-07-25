@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "budgets")
@@ -35,7 +38,8 @@ public class Budget {
 	@Column(name = "end_date")
 	private Date endDate;
 
-	@OneToMany(mappedBy = "budget")
+	@JsonIgnore
+	@OneToMany(mappedBy = "budget", fetch = FetchType.LAZY)
 	private List<Donation> donations;
 
 	public Budget() {
@@ -49,6 +53,18 @@ public class Budget {
 		this.amout = amout;
 		this.startDate = startDate;
 		this.endDate = endDate;
+	}
+
+	public long getBudgetId() {
+		return budgetId;
+	}
+
+	public void setBudgetId(long budgetId) {
+		this.budgetId = budgetId;
+	}
+
+	public void setAmout(float amout) {
+		this.amout = amout;
 	}
 
 	public String getBudgetName() {

@@ -9,5 +9,9 @@ public interface BudgetService {
 	
 	public List<Budget> getList();
 	
-	public Optional<Budget> getBudget(Long id);
+	public Budget getBudget(Long id);
+	
+	public void save(Budget budget);
+	
+	public void delete(Long id);
 }

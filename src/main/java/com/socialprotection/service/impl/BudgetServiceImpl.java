@@ -29,7 +29,16 @@ public class BudgetServiceImpl implements BudgetService{
 		return budgetRepository.findAll();
 	}
 	
-	public Optional<Budget> getBudget(Long id) {
-		return budgetRepository.findById(id);
+	public Budget getBudget(Long id) {
+		return budgetRepository.findOne(id);
 	}
+	
+	public void save(Budget budget) {
+		budgetRepository.save(budget);
+    }
+	
+	public void delete(Long id) {
+		budgetRepository.delete(id);
+    }
+	
 }

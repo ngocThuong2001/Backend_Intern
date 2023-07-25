@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "images")
@@ -16,28 +19,30 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "image_id")
 	private long imageId;
-	
+
 	@Column(name = "image_url")
 	private String imageUrl;
 
+	@JsonInclude()
+	@Transient
 	@OneToOne(mappedBy = "image")
 	private Employee employee;
 
+	@JsonInclude()
+	@Transient
 	@OneToOne(mappedBy = "image")
 	private Children children;
-	
+
 	@OneToOne(mappedBy = "image")
-	private Article	article;
+	private Article article;
 
 	public long getImageId() {
 		return imageId;
 	}
 
-//	public void setImageId(long imageId) {
-//		this.imageId = imageId;
-//	}
-
-
+	public void setImageId(long imageId) {
+		this.imageId = imageId;
+	}
 
 	public Employee getEmployee() {
 		return employee;
@@ -63,17 +68,13 @@ public class Image {
 		this.children = children;
 	}
 
-	public Image(String imageUrl, Employee employee, Children children) {
+	public Image(String imageUrl) {
 		super();
 		this.imageUrl = imageUrl;
-		this.employee = employee;
-		this.children = children;
 	}
 
 	public Image() {
 		super();
 	}
-
-	
 
 }
