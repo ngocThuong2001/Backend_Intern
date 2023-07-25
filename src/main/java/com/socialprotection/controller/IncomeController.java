@@ -17,60 +17,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.socialprotection.entity.Budget;
-import com.socialprotection.service.BudgetService;
+import com.socialprotection.entity.Income;
+import com.socialprotection.service.IncomeService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/budgets")
-public class BudgetController {
+@RequestMapping("/incomes")
+public class IncomeController {
 
 	@Autowired
-	private BudgetService budgetservice;
+	private IncomeService incomeservice;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Budget>> listBudget() {
-		List<Budget> listEmp = budgetservice.getList();
-		return ResponseEntity.ok(listEmp);
+	public ResponseEntity<List<Income>> listIncome() {
+		List<Income> listIncome = incomeservice.getList();
+		return ResponseEntity.ok(listIncome);
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Budget> getBudget(@PathVariable("id") Long id) {
-		Budget itemBud = budgetservice.getBudget(id);
-		return ResponseEntity.ok(itemBud);
+	public ResponseEntity<Income> getIncome(@PathVariable("id") Long id) {
+		Income itemIn = incomeservice.getIncome(id);
+		return ResponseEntity.ok(itemIn);
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Budget> addBudget(@RequestBody Budget budget) {
+	public ResponseEntity<Income> addBudget(@RequestBody Income income) {
 		try {
-			Budget _budget = new Budget(budget.getBudgetName(), budget.getBudgetDescription(), budget.getAmout(),
-					budget.getStartDate(), budget.getEndDate());
-			budgetservice.save(_budget);
-			return ResponseEntity.ok(_budget);
+			Income _income = new Income(income.getBudget(), income.getBankAccount(), income.getIncomeName(), income.getIncomeDescription(), income.getAmount(),
+					income.getDateTime());
+			incomeservice.save(_income);
+			return ResponseEntity.ok(_income);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR_500).body(null);
 		}
 	}
 
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Budget> updateTutorial(@PathVariable("id") long id, @RequestBody Budget budget) {
-		Budget itemBud = budgetservice.getBudget(id);
-		itemBud.setBudgetName(budget.getBudgetName());
-		itemBud.setBudgetDescription(budget.getBudgetDescription());
-		itemBud.setAmout(budget.getAmout());
-		itemBud.setStartDate(budget.getStartDate());
-		itemBud.setEndDate(budget.getEndDate());
-		budgetservice.save(itemBud);
-		return ResponseEntity.ok(itemBud);
+	public ResponseEntity<Income> updateTutorial(@PathVariable("id") long id, @RequestBody Income income) {
+		Income itemIn = incomeservice.getIncome(id);
+		itemIn.setBudget(income.getBudget());
+		itemIn.setBankAccount(income.getBankAccount());
+		itemIn.setIncomeName(income.getIncomeName());
+		itemIn.setIncomeDescription(income.getIncomeDescription());
+		itemIn.setAmount(income.getAmount());
+		itemIn.setDateTime(income.getDateTime());
+		return ResponseEntity.ok(itemIn);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteTutorial(@PathVariable("id") Long id) {
 		try {
-			budgetservice.delete(id);
+			incomeservice.delete(id);
 			return ResponseEntity.ok("Delete Success!");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR_500).body(null);
 		}
 	}
-
 }

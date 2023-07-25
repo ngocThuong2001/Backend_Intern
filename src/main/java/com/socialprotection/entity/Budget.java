@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "budgets")
 public class Budget {
@@ -38,9 +36,11 @@ public class Budget {
 	@Column(name = "end_date")
 	private Date endDate;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "budget", fetch = FetchType.LAZY)
 	private List<Donation> donations;
+	
+	@OneToMany(mappedBy = "budget", fetch = FetchType.LAZY)
+	private List<Income> incomes;
 
 	public Budget() {
 		super();
