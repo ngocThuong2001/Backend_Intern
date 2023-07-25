@@ -1,6 +1,8 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "adoptions")
@@ -28,13 +33,15 @@ public class Adoption {
 	@Column(name = "status")
 	private char status;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "child_id")
 	private Children children;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "adopter_id")
-	private Adopter adopter;
+	@OneToMany(mappedBy = "adoption")
+	private List<Adopter> adopters;
+	
+	
 
 	public long getAdoptionId() {
 		return adoptionId;
@@ -68,20 +75,24 @@ public class Adoption {
 		this.children = children;
 	}
 
-	public Adopter getAdopter() {
-		return adopter;
+	
+
+	
+
+	public List<Adopter> getAdopters() {
+		return adopters;
 	}
 
-	public void setAdopter(Adopter adopter) {
-		this.adopter = adopter;
+	public void setAdopters(List<Adopter> adopters) {
+		this.adopters = adopters;
 	}
 
-	public Adoption(Date registerDate, char status, Children children, Adopter adopter) {
+	
+	
+	public Adoption(Date registerDate, char status) {
 		super();
 		this.registerDate = registerDate;
 		this.status = status;
-		this.children = children;
-		this.adopter = adopter;
 	}
 
 	public Adoption() {
