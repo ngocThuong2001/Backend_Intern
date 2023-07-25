@@ -8,7 +8,8 @@ import com.socialprotection.entity.Employee;
 import com.socialprotection.repository.EmployeeRepository;
 
 public interface EmployeeService {
-	Employee save(Employee employee);
-	List<Employee> findAll();
-	Employee findById(long id);
+	public Employee save(Employee employee);
+	public List<Employee> findAll();
+	public Employee findById(long id);
+	public void deleteEmployeeById(long id);
 }

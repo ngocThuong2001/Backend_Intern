@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,10 +26,8 @@ public class Guardian extends Person {
 	private String email;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "child_id")
+	@JoinColumn(name = "child_id", nullable = false)
 	private Children children;
-
-	
 
 	public long getGuardianID() {
 		return guardianID;
@@ -64,9 +61,6 @@ public class Guardian extends Person {
 		this.children = children;
 	}
 
-	
-
-	
 	public Guardian(String phoneNumber, String email, Children children) {
 		super();
 		this.phoneNumber = phoneNumber;

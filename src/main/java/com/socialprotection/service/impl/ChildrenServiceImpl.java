@@ -52,4 +52,9 @@ public class ChildrenServiceImpl implements ChildrenService {
 	public Children findById(long id) {
 		return childrenRepository.findOne(id);
 	}
+
+	@Override
+	public void deleteChildrenById(long id) {
+		childrenRepository.delete(id);
+	}
 }

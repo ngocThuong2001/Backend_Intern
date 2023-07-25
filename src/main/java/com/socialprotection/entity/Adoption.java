@@ -21,35 +21,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "adoptions")
 public class Adoption {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "adoption_id")
 	private long adoptionId;
-	
+
 	@Column(name = "register_date")
 	private Date registerDate;
-	
+
 	@Column(name = "status")
 	private char status;
-	
+
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "child_id")
 	private Children children;
-	
+
 	@OneToMany(mappedBy = "adoption")
-	private List<Adopter> adopters;
-	
-	
+	private List<Adopter> adopters = new ArrayList<Adopter>();
 
 	public long getAdoptionId() {
 		return adoptionId;
 	}
 
-//	public void setAdoptionId(long adoptionId) {
-//		this.adoptionId = adoptionId;
-//	}
+	public void setAdoptionId(long adoptionId) {
+		this.adoptionId = adoptionId;
+	}
 
 	public Date getRegisterDate() {
 		return registerDate;
@@ -75,10 +73,6 @@ public class Adoption {
 		this.children = children;
 	}
 
-	
-
-	
-
 	public List<Adopter> getAdopters() {
 		return adopters;
 	}
@@ -87,8 +81,6 @@ public class Adoption {
 		this.adopters = adopters;
 	}
 
-	
-	
 	public Adoption(Date registerDate, char status) {
 		super();
 		this.registerDate = registerDate;
@@ -98,8 +90,5 @@ public class Adoption {
 	public Adoption() {
 		super();
 	}
-	
-	
-	
 
 }

@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "employees")
 public class Employee extends Person {
@@ -33,47 +36,69 @@ public class Employee extends Person {
 
 	private String email;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@Column(name = "birthday")
+	private Date birthDay;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "from_date")
 	private Date fromDate;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "to_date")
 	private Date toDate;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "job_id")
 	private Job job;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "employee")
 	private List<Children> children;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "empSalary")
 	private List<Salary> salaries;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "empAct")
 	private Activity activity;
 
-	@OneToMany(mappedBy = "employee")
-	private List<Shift> shift;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "shift_id")
+	private Shift shift;
+
+	public Date getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
 
 	public Employee(String fullName, String firstName, String lastName, String gender, String nationality,
-			String addressPermanent, String addressTemporary, String phoneNumber, String email, Date fromDate,
-			Date toDate) {
+			String addressPermanent, String addressTemporary, Image image, String phoneNumber, String email,
+			Date birthDay, Date fromDate, Date toDate, Job job, List<Salary> salaries) {
 		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.image = image;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.birthDay = birthDay;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
+		this.job = job;
+		this.salaries = salaries;
 	}
 
 	public Employee() {
 		super();
 	}
 
-	public List<Shift> getShift() {
+	public Shift getShift() {
 		return shift;
 	}
 
-	public void setShift(List<Shift> shift) {
+	public void setShift(Shift shift) {
 		this.shift = shift;
 	}
 

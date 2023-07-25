@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "jobs")
 public class Job {
@@ -18,11 +20,25 @@ public class Job {
 	@Column(name = "job_id")
 	private long jobId;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Employee> employees;
 
 	@Column(name = "job_title")
 	private String jobTitle;
+
+	@Column(name = "job_description", columnDefinition = "TEXT")
+	private String jobDescription;
+
+	public Job() {
+		super();
+	}
+
+	public Job(String jobTitle, String jobDescription) {
+		super();
+		this.jobTitle = jobTitle;
+		this.jobDescription = jobDescription;
+	}
 
 	public long getJobId() {
 		return jobId;
@@ -48,13 +64,12 @@ public class Job {
 		this.jobTitle = jobTitle;
 	}
 
-	public Job(String jobTitle) {
-		super();
-		this.jobTitle = jobTitle;
+	public String getJobDescription() {
+		return jobDescription;
 	}
 
-	public Job() {
-		super();
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
 	}
 
 }

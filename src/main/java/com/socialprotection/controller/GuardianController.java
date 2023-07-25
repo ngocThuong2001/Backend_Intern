@@ -1,29 +1,29 @@
 package com.socialprotection.controller;
 
-import org.springframework.http.MediaType;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.socialprotection.auth.RegisterRequest;
-import com.socialprotection.service.UserService;
-import com.socialprotection.utils.StatusResponse;
+import com.socialprotection.entity.Guardian;
+import com.socialprotection.service.GuardianService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
+@RequestMapping("/api/guardians")
+public class GuardianController {
+	
 	@Autowired
-	private UserService userService;
+	private GuardianService guardianService;
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<StatusResponse> saveUser(RegisterRequest registerRequest){
-//		return
-		return  ResponseEntity.ok(userService.saveUser(registerRequest));
+	public ResponseEntity<Guardian> saveGuardian(@RequestBody Guardian guardian) {
+		return ResponseEntity.ok(guardianService.save(guardian));
 	}
 }

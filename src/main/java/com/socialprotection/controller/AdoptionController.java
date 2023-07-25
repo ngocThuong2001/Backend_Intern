@@ -3,6 +3,7 @@ package com.socialprotection.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.socialprotection.utils.StatusResponse;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -29,7 +31,7 @@ public class AdoptionController {
 //	}
 	
 	//create new adoption
-	@PostMapping("/adoption")
+	@PostMapping(value = "/adoption", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Adoption> createAdoption(@RequestBody Adoption adoption) {
 //		return adoptionRepository.save(adoption);
 		return ResponseEntity.ok(adoption);

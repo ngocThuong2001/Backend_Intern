@@ -16,5 +16,9 @@ public interface ChildrenService {
 
 //	Select children
 	public List<Children> findAll();
+
 	public Children findById(long id);
+
+	public void deleteChildrenById(long id);
+
 }
