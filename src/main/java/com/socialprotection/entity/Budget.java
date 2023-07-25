@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "budgets")
 public class Budget {
@@ -35,6 +37,7 @@ public class Budget {
 	@Column(name = "end_date")
 	private Date endDate;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "budget")
 	private List<Donation> donations;
 
@@ -49,6 +52,26 @@ public class Budget {
 		this.amout = amout;
 		this.startDate = startDate;
 		this.endDate = endDate;
+	}
+
+	public long getBudgetId() {
+		return budgetId;
+	}
+
+	public void setBudgetId(long budgetId) {
+		this.budgetId = budgetId;
+	}
+
+	public List<Donation> getDonations() {
+		return donations;
+	}
+
+	public void setDonations(List<Donation> donations) {
+		this.donations = donations;
+	}
+
+	public void setAmout(float amout) {
+		this.amout = amout;
 	}
 
 	public String getBudgetName() {

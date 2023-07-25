@@ -21,20 +21,43 @@ public class Person {
 	@Column(name = "nationality")
 	private String nationality;
 
+	@Column(name = "address_permanent", columnDefinition = "TEXT")
+	private String addressPermanent;
 
-	public Person(String fullName, String firstName, String lastName, String gender, String nationality) {
+	@Column(name = "address_temporary", columnDefinition = "TEXT")
+	private String addressTemporary;
+
+	public Person(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary) {
 		super();
 		this.fullName = fullName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.nationality = nationality;
+		this.addressPermanent = addressPermanent;
+		this.addressTemporary = addressTemporary;
 	}
 
 	public Person() {
 		super();
 	}
 
+	public String getAddressPermanent() {
+		return addressPermanent;
+	}
+
+	public void setAddressPermanent(String addressPermanent) {
+		this.addressPermanent = addressPermanent;
+	}
+
+	public String getAddressTemporary() {
+		return addressTemporary;
+	}
+
+	public void setAddressTemporary(String addressTemporary) {
+		this.addressTemporary = addressTemporary;
+	}
 
 	public String getFullName() {
 		return fullName;

@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.socialprotection.entity.Budget;
 import com.socialprotection.entity.ChildrenStatus;
 import com.socialprotection.entity.Role;
 import com.socialprotection.entity.TypeOfOrphan;
 import com.socialprotection.entity.User;
+import com.socialprotection.repository.BudgetRepository;
 import com.socialprotection.service.ChildrenService;
 import com.socialprotection.service.UserService;
 
@@ -19,6 +21,9 @@ public class HomeController {
 
 	@Autowired
 	ChildrenService childrenService;
+	
+	@Autowired
+	private BudgetRepository budgetRepository;
 
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -62,6 +67,8 @@ public class HomeController {
 				.saveChildrenStatus(new ChildrenStatus("Đang được bảo trợ", "Trẻ em vẫn đang được bảo trợ"));
 		childrenService.saveChildrenStatus(new ChildrenStatus("Đã được nhận nuôi", "Trẻ em đã được nhận nuôi"));
 		childrenService.saveChildrenStatus(new ChildrenStatus("Đã quá tuổi", "Trẻ em đã quá tuổi"));
+		
+		budgetRepository.save(new Budget("bd1", null, 0, null, null));
 
 	}
 }

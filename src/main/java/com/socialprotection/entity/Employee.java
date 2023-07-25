@@ -1,7 +1,6 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -55,16 +53,23 @@ public class Employee extends Person {
 	@OneToMany(mappedBy = "employee")
 	private List<Shift> shift;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private Address address;
-
-	public Address getAddress() {
-		return address;
+	public Employee(Image image, char phoneNumber, String email, Date fromDate, Date toDate, List<Job> jobs,
+			List<Children> children, List<Salary> salaries, Activity activity, List<Shift> shift) {
+		super();
+		this.image = image;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.jobs = jobs;
+		this.children = children;
+		this.salaries = salaries;
+		this.activity = activity;
+		this.shift = shift;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public Employee() {
+		super();
 	}
 
 	public List<Shift> getShift() {
@@ -157,25 +162,6 @@ public class Employee extends Person {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
-	}
-
-	public Employee(Image image, char phoneNumber, String email, Date fromDate, Date toDate, List<Job> jobs,
-			List<Children> children, List<Salary> salaries, Activity activity, List<Shift> shift) {
-		super();
-		this.image = image;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-		this.jobs = jobs;
-		this.children = children;
-		this.salaries = salaries;
-		this.activity = activity;
-		this.shift = shift;
-	}
-
-	public Employee() {
-		super();
 	}
 
 }
