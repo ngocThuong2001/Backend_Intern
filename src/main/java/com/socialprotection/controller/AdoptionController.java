@@ -29,7 +29,7 @@ public class AdoptionController {
 //	}
 	
 	//create new adoption
-	@PostMapping("/adoption")
+	@PostMapping(value = "/adoption", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Adoption> createAdoption(@RequestBody Adoption adoption) {
 //		return adoptionRepository.save(adoption);
 		return ResponseEntity.ok(adoption);

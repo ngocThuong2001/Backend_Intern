@@ -39,7 +39,7 @@ public class Adoption {
 	private Children children;
 	
 	@OneToMany(mappedBy = "adoption")
-	private List<Adopter> adopters;
+	private List<Adopter> adopters = new ArrayList<Adopter>();
 	
 	
 

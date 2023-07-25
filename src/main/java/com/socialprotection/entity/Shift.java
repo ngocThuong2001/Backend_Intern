@@ -1,6 +1,7 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,9 +31,8 @@ public class Shift {
 	@Column(name = "time_end")
 	private Date timeEnd;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id")
-	private Employee employee;
+	@OneToMany(mappedBy = "shift")
+	private List<Employee> employees;
 
 	public long getShiftId() {
 		return shiftId;
@@ -65,20 +66,23 @@ public class Shift {
 		this.timeEnd = timeEnd;
 	}
 
-	public Employee getEmployee() {
-		return employee;
+	
+
+	public List<Employee> getEmployees() {
+		return employees;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 
-	public Shift(String shiftTitle, Date timeStart, Date timeEnd, Employee employee) {
+	
+
+	public Shift(String shiftTitle, Date timeStart, Date timeEnd) {
 		super();
 		this.shiftTitle = shiftTitle;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
-		this.employee = employee;
 	}
 
 	public Shift() {

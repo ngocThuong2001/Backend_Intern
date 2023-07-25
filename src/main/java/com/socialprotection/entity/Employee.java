@@ -56,16 +56,22 @@ public class Employee extends Person {
 	@OneToOne(mappedBy = "empAct")
 	private Activity activity;
 
-	@OneToMany(mappedBy = "employee")
-	private List<Shift> shift;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "shift_id")
+	private Shift shift;
+	
+	
 
 	
 
-	public List<Shift> getShift() {
+	
+
+	public Shift getShift() {
 		return shift;
 	}
 
-	public void setShift(List<Shift> shift) {
+	public void setShift(Shift shift) {
 		this.shift = shift;
 	}
 
