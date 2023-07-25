@@ -1,6 +1,5 @@
 package com.socialprotection.controller;
 
-import java.sql.Date;
 import java.sql.Time;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +27,13 @@ public class HomeController {
 
 	@Autowired
 	ChildrenService childrenService;
-	
+
 	@Autowired
 	private BudgetRepository budgetRepository;
-	
+
 	@Autowired
 	private JobRepository jobRepository;
-	
+
 	@Autowired
 	private ShiftRepository shiftRepository;
 
@@ -80,13 +79,16 @@ public class HomeController {
 				.saveChildrenStatus(new ChildrenStatus("Đang được bảo trợ", "Trẻ em vẫn đang được bảo trợ"));
 		childrenService.saveChildrenStatus(new ChildrenStatus("Đã được nhận nuôi", "Trẻ em đã được nhận nuôi"));
 		childrenService.saveChildrenStatus(new ChildrenStatus("Đã quá tuổi", "Trẻ em đã quá tuổi"));
-		
-		
-		jobRepository.save(new Job("Chăm sóc trẻ", "- Chăm sóc và nuôi dưỡng các trẻ em mồ côi. Chia sẻ cuộc sống của mình với các con, chăm sóc, nuôi dạy, che chở và mang lại cho các con cơ hội phát triển, những mối quan hệ mới, lâu dài và tình thương yêu trong gia đình SOS của mình."));
+
+		jobRepository.save(new Job("Chăm sóc trẻ",
+				"- Chăm sóc và nuôi dưỡng các trẻ em mồ côi. Chia sẻ cuộc sống của mình với các con, chăm sóc, nuôi dạy, che chở và mang lại cho các con cơ hội phát triển, những mối quan hệ mới, lâu dài và tình thương yêu trong gia đình SOS của mình."));
 		jobRepository.save(new Job("Nấu ăn", "Nấu ăn"));
 
-		shiftRepository.save(new Shift("Ca 1", new Time(6, 0, 0), new Time(14,0,0)));
-		shiftRepository.save(new Shift("Ca 2", new Time(14, 0, 0), new Time(22,0,0)));
-		shiftRepository.save(new Shift("Ca 3", new Time(22, 0, 0), new Time(6,0,0)));
+		shiftRepository.save(new Shift("Ca 1", new Time(6, 0, 0), new Time(14, 0, 0)));
+		shiftRepository.save(new Shift("Ca 2", new Time(14, 0, 0), new Time(22, 0, 0)));
+		shiftRepository.save(new Shift("Ca 3", new Time(22, 0, 0), new Time(6, 0, 0)));
+
+		budgetRepository.save(new Budget("tien quy", "xay dung", 10000, null, null));
+		budgetRepository.save(new Budget("tien an", "an uong", 20000, null, null));
 	}
 }
