@@ -27,8 +27,8 @@ public class Adopter {
 	@Column(name = "bithday")
 	private Date bithday;
 	
-	@Column(name = "phone_number")
-	private char phoneNumber;
+	@Column(name = "phone_number", columnDefinition = "char(10)")
+	private String phoneNumber;
 	
 	@Column(name = "email")
 	private String email;
@@ -95,11 +95,11 @@ public class Adopter {
 		this.bithday = bithday;
 	}
 
-	public char getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(char phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -159,9 +159,8 @@ public class Adopter {
 		this.person = person;
 	}
 
-	public Adopter(Date bithday, char phoneNumber, String email, String nation, String occupation, float income,
-			String relationship, CitizenIdentification citizenIdentification, Person person, List<Adoption> adoptions,
-			List<AdoptionHistory> adoptionHistory) {
+	public Adopter(Date bithday, String phoneNumber, String email, String nation, String occupation, float income,
+			String relationship) {
 		super();
 		this.bithday = bithday;
 		this.phoneNumber = phoneNumber;
@@ -170,10 +169,7 @@ public class Adopter {
 		this.occupation = occupation;
 		this.income = income;
 		this.relationship = relationship;
-		this.citizenIdentification = citizenIdentification;
-		this.person = person;
-		this.adoptions = adoptions;
-		this.adoptionHistory = adoptionHistory;
+		
 	}
 
 	public Adopter() {
