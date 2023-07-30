@@ -16,62 +16,57 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.socialprotection.dto.IncomeDTO;
-import com.socialprotection.entity.Income;
-import com.socialprotection.service.IncomeService;
+import com.socialprotection.entity.Expense;
+import com.socialprotection.service.ExpenseService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/incomes")
-public class IncomeController {
+@RequestMapping("/expenses")
+public class ExpenseController {
 
 	@Autowired
-	private IncomeService incomeservice;
+	private ExpenseService expenseservice;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Income>> listIncome() {
-		List<Income> listIncome = incomeservice.getList();
-		for (Income income : listIncome) {
-			IncomeDTO incomeDTO = new IncomeDTO();
-			System.out.println(income.getBudget().getBudgetId());
-		}
-		return ResponseEntity.ok(listIncome);
+	public ResponseEntity<List<Expense>> listExpense() {
+		List<Expense> listExpense = expenseservice.getList();
+		return ResponseEntity.ok(listExpense);
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Income> getIncome(@PathVariable("id") Long id) {
-		Income itemIn = incomeservice.getIncome(id);
-		return ResponseEntity.ok(itemIn);
+	public ResponseEntity<Expense> getExpense(@PathVariable("id") Long id) {
+		Expense itemEx = expenseservice.getExpense(id);
+		return ResponseEntity.ok(itemEx);
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Income> addBudget(@RequestBody Income income) {
+	public ResponseEntity<Expense> addBudget(@RequestBody Expense expense) {
 		try {
-			Income _income = new Income(income.getBudget(), income.getBankAccount(), income.getIncomeName(), income.getIncomeDescription(), income.getAmount(),
-					income.getDateTime());
-			incomeservice.save(_income);
-			return ResponseEntity.ok(_income);
+			Expense _expense = new Expense(expense.getBudget(), expense.getBankAccount(), expense.getExpenseName(), expense.getExpenseDescription(), expense.getAmount(),
+					expense.getDateTime());
+			expenseservice.save(_expense);
+			return ResponseEntity.ok(_expense);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR_500).body(null);
 		}
 	}
 
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Income> updateTutorial(@PathVariable("id") long id, @RequestBody Income income) {
-		Income itemIn = incomeservice.getIncome(id);
-		itemIn.setBudget(income.getBudget());
-		itemIn.setBankAccount(income.getBankAccount());
-		itemIn.setIncomeName(income.getIncomeName());
-		itemIn.setIncomeDescription(income.getIncomeDescription());
-		itemIn.setAmount(income.getAmount());
-		itemIn.setDateTime(income.getDateTime());
-		return ResponseEntity.ok(itemIn);
+	public ResponseEntity<Expense> updateTutorial(@PathVariable("id") long id, @RequestBody Expense expense) {
+		Expense itemEx = expenseservice.getExpense(id);
+		itemEx.setBudget(expense.getBudget());
+		itemEx.setBankAccount(expense.getBankAccount());
+		itemEx.setExpenseName(expense.getExpenseName());
+		itemEx.setExpenseDescription(expense.getExpenseDescription());
+		itemEx.setAmount(expense.getAmount());
+		itemEx.setDateTime(expense.getDateTime());
+		return ResponseEntity.ok(itemEx);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteTutorial(@PathVariable("id") Long id) {
 		try {
-			incomeservice.delete(id);
+			expenseservice.delete(id);
 			return ResponseEntity.ok("Delete Success!");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR_500).body(null);
