@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "jobs")
 public class Job {
@@ -22,6 +24,7 @@ public class Job {
 	@Column(name = "job_id")
 	private long jobId;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Employee> employees;
 	

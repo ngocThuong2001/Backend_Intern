@@ -15,7 +15,7 @@ import com.socialprotection.entity.Children;
 import com.socialprotection.service.ChildrenService;
 
 @RestController
-@RequestMapping("/api/children")
+@RequestMapping("/api")
 public class ChildrenController {
 	
 	@Autowired
@@ -26,7 +26,7 @@ public class ChildrenController {
 		return ResponseEntity.ok(childrenService.fildAll());
 	}
 	
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/children", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Children> saveChildren(@RequestBody Children children) {
 		return ResponseEntity.ok(childrenService.save(children));
 	}

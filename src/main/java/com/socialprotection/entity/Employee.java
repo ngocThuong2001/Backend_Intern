@@ -41,7 +41,7 @@ public class Employee extends Person {
 	private Date toDate;
 
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "job_id")
 	private Job job;
 	
@@ -57,7 +57,7 @@ public class Employee extends Person {
 	private Activity activity;
 
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "shift_id")
 	private Shift shift;
 	

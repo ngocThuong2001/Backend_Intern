@@ -41,7 +41,7 @@ public class Children extends Person {
 	@JoinColumn(name = "image_id")
 	private Image image;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 
@@ -53,7 +53,7 @@ public class Children extends Person {
 	@JoinColumn(name = "child_status_id")
 	private ChildrenStatus childrenStatus;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "citizen_id")
 	private CitizenIdentification citizenId;
 
@@ -69,7 +69,7 @@ public class Children extends Person {
 	@Column(name = "date_out")
 	private Date dateOut;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "child_activities", joinColumns = {
 			@JoinColumn(name = "child_id", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "activity_id", nullable = false) })

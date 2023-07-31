@@ -2,6 +2,7 @@ package com.socialprotection.entity;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,35 +17,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "citizen_identification")
 public class CitizenIdentification {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "citizen_id")
 	private long citizenId;
-	
+
 	@Column(name = "citizen_ident_number", columnDefinition = "Char(12)")
 	private String citizenIdentNumber;
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "issue_date")
 	private Date issueDate;
-	
+
 	@Column(name = "issue_place")
 	private String issuePlace;
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "expire_date")
 	private Date expireDate;
-	
+
 	@JsonIgnore
 	@OneToOne(mappedBy = "citizenId")
-    private Children children;
-	
+	private Children children;
+
 	@JsonIgnore
-	@OneToOne(mappedBy = "citizenIdentification")
-    private Adopter adopter;
-	
-	
+	@OneToOne(mappedBy = "citizenIdentification", cascade = CascadeType.ALL)
+	private Adopter adopter;
 
 	public Adopter getAdopter() {
 		return adopter;
@@ -116,7 +115,5 @@ public class CitizenIdentification {
 	public CitizenIdentification() {
 		super();
 	}
-	
-	
 
 }

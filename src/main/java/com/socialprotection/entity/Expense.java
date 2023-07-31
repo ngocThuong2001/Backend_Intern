@@ -21,11 +21,11 @@ public class Expense {
 	@Column(name = "expense_id")
 	private long expenseId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "budget_id")
 	private Budget budget;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bank_account_id")
 	private BankAccount bankAccount;
 	
