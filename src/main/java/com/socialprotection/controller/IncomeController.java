@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.socialprotection.dto.IncomeDTO;
 import com.socialprotection.entity.Income;
 import com.socialprotection.service.IncomeService;
 
@@ -31,10 +30,6 @@ public class IncomeController {
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Income>> listIncome() {
 		List<Income> listIncome = incomeservice.getList();
-		for (Income income : listIncome) {
-			IncomeDTO incomeDTO = new IncomeDTO();
-			System.out.println(income.getBudget().getBudgetId());
-		}
 		return ResponseEntity.ok(listIncome);
 	}
 

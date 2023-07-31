@@ -26,7 +26,7 @@ import com.socialprotection.service.BudgetService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/budgets")
+@RequestMapping("/api/budgets")
 public class BudgetController {
 
 	@Autowired

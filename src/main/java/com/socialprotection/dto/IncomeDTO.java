@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class IncomeDTO {
 
-	private long incomeId;
 	private long budgetId;
 	private long bankAccountId;
 	private String incomeName;
@@ -16,24 +15,15 @@ public class IncomeDTO {
 		super();
 	}
 
-	public IncomeDTO(long incomeId ,long budgetId, long bankAccountId, String incomeName, String incomeDescription, float amount,
+	public IncomeDTO(long budgetId, long bankAccountId, String incomeName, String incomeDescription, float amount,
 			Date dateTime) {
 		super();
-		this.incomeId = incomeId;
 		this.budgetId = budgetId;
 		this.bankAccountId = bankAccountId;
 		this.incomeName = incomeName;
 		this.incomeDescription = incomeDescription;
 		this.amount = amount;
 		this.dateTime = dateTime;
-	}
-
-	public long getIncomeId() {
-		return incomeId;
-	}
-
-	public void setIncomeId(long incomeId) {
-		this.incomeId = incomeId;
 	}
 
 	public long getBudgetId() {

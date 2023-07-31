@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "incomes")
 public class Income {
@@ -38,6 +40,7 @@ public class Income {
 	@Column(name = "amount")
 	private float amount;
 	
+	@JsonFormat(pattern="dd-MM-yyyy")
 	@Column(name = "date_time")
 	private Date dateTime;
 	
