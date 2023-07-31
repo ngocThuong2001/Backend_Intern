@@ -37,12 +37,11 @@ public class HomeController {
 	@Autowired
 	private ShiftRepository shiftRepository;
 
-
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public void homePage() {
-		Role role = userService.saveRole(new Role("SUPER_ADMIN"));
-		Role role2 = userService.saveRole(new Role("ADMIN"));
-		Role role3 = userService.saveRole(new Role("WEB_ADMIN"));
+		Role role = userService.saveRole(new Role("SUPER_ADMIN","Quyền quản trị cao nhất, có quyền quản lý tài khoản admin"));
+		Role role2 = userService.saveRole(new Role("ADMIN", "Quyền quản trị hệ thống, thực hiện thêm, sửa, xóa các thông tin của trung tâm"));
+		Role role3 = userService.saveRole(new Role("WEB_ADMIN", "Quyền quản trị website, thêm sửa xóa các bài viết và nội dung hiển thị trên website"));
 
 		userService.saveUser(new User("SUPERADMIM01", "superadmin@01", role));
 
