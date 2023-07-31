@@ -21,7 +21,7 @@ import com.socialprotection.service.BankAccountService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/bank-account")
+@RequestMapping("/api/bank-account")
 public class BankAccountController {
 
 	@Autowired

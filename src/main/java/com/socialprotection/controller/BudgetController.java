@@ -1,9 +1,13 @@
 package com.socialprotection.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.jetty.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.socialprotection.entity.Budget;
@@ -21,7 +26,7 @@ import com.socialprotection.service.BudgetService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/budgets")
+@RequestMapping("/api/budgets")
 public class BudgetController {
 
 	@Autowired
@@ -29,14 +34,27 @@ public class BudgetController {
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Budget>> listBudget() {
-		List<Budget> listEmp = budgetservice.getList();
-		return ResponseEntity.ok(listEmp);
+		List<Budget> listBud = budgetservice.getList();
+		return ResponseEntity.ok(listBud);
 	}
-
+	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Budget> getBudget(@PathVariable("id") Long id) {
 		Budget itemBud = budgetservice.getBudget(id);
 		return ResponseEntity.ok(itemBud);
+	}
+	
+	@GetMapping(value = "/page", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Budget>> pageBudget(Budget budget, @RequestParam("p") Optional<Integer> p) {
+		Pageable paging = new PageRequest(p.orElse(0), 5);
+		Page<Budget> list = budgetservice.getListPage(paging);
+		return ResponseEntity.ok(list.getContent());
+	}
+
+	@GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Budget>> resultBudget(@RequestParam("query") String query) {
+		List<Budget> result = budgetservice.searchBudget(query);
+		return ResponseEntity.ok(result);
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

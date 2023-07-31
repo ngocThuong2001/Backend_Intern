@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name = "budgets")
@@ -32,9 +34,11 @@ public class Budget {
 	@Column(name = "amount")
 	private float amout;
 
+	@JsonFormat(pattern="dd-MM-yyyy")
 	@Column(name = "start_date")
 	private Date startDate;
 
+	@JsonFormat(pattern="dd-MM-yyyy")
 	@Column(name = "end_date")
 	private Date endDate;
 
