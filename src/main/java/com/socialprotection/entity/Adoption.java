@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -36,11 +37,11 @@ public class Adoption {
 	private String status;
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "child_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "child_id")
 	private Children children;
 
-	@OneToMany(mappedBy = "adoption", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "adoption", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private Set<Adopter> adopters;
 
 	@PrePersist
@@ -48,12 +49,13 @@ public class Adoption {
 		adopters.forEach(c -> c.setAdoption(this));
 	}
 
-	public long getAdoptionId() {
-		return adoptionId;
+	@PreUpdate
+	private void preUpdate() {
+		adopters.forEach(c -> c.setAdoption(this));
 	}
 
-	public void setAdoptionId(long adoptionId) {
-		this.adoptionId = adoptionId;
+	public long getAdoptionId() {
+		return adoptionId;
 	}
 
 	public Date getRegisterDate() {
@@ -78,6 +80,10 @@ public class Adoption {
 
 	public void setChildren(Children children) {
 		this.children = children;
+	}
+
+	public void setAdoptionId(long adoptionId) {
+		this.adoptionId = adoptionId;
 	}
 
 	public Set<Adopter> getAdopters() {

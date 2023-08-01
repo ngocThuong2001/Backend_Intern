@@ -36,11 +36,11 @@ public class Activity {
 	@Column(name = "end_time")
 	private Date endTime;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "employee_id")
 	private Employee empAct;
 	
-	@ManyToMany(mappedBy = "activities", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "activities", fetch = FetchType.EAGER)
     private Set<Children> children = new HashSet<>();
 
 	public long getActivityId() {

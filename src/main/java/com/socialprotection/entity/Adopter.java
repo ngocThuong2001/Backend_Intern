@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -51,25 +52,24 @@ public class Adopter extends Person {
 	@Column(name = "relationship")
 	private String relationship;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "citizen_ident_id")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "citizen_ident_id", insertable = true)
 	private CitizenIdentification citizenIdentification;
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "adoption_id", updatable = true, insertable = true)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "adoption_id", referencedColumnName = "adoption_id", updatable = false)
 	private Adoption adoption;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "adopter")
 	private List<AdoptionHistory> adoptionHistory;
-
-
+	
 	
 
-	public void setAdopterId(long adopterId) {
-		this.adopterId = adopterId;
-	}
+//	public void setAdopterId(long adopterId) {
+//		this.adopterId = adopterId;
+//	}
 
 	public List<AdoptionHistory> getAdoptionHistory() {
 		return adoptionHistory;
@@ -78,8 +78,6 @@ public class Adopter extends Person {
 	public void setAdoptionHistory(List<AdoptionHistory> adoptionHistory) {
 		this.adoptionHistory = adoptionHistory;
 	}
-
-	
 
 	public Adoption getAdoption() {
 		return adoption;
@@ -160,8 +158,6 @@ public class Adopter extends Person {
 	public void setCitizenIdentification(CitizenIdentification citizenIdentification) {
 		this.citizenIdentification = citizenIdentification;
 	}
-
-	
 
 	public Adopter(String fullName, String firstName, String lastName, String gender, String nationality,
 			String addressPermanent, String addressTemporary, Date birthday, String phoneNumber, String email,

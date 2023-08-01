@@ -20,7 +20,7 @@ import com.socialprotection.service.ChildrenService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/children")
+@RequestMapping("/api")
 public class ChildrenController {
 
 	@Autowired
@@ -30,8 +30,8 @@ public class ChildrenController {
 	public ResponseEntity<List<Children>> getAllChildren() {
 		return ResponseEntity.ok(childrenService.findAll());
 	}
-
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	
+	@PostMapping(value = "/children", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Children> saveChildren(@RequestBody Children children) {
 		return ResponseEntity.ok(childrenService.save(children));
 	}
