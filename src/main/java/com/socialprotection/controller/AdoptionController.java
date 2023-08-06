@@ -31,68 +31,50 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 public class AdoptionController {
-	
+
 	@Autowired
 	private AdoptionService adoptionService;
-	
-//	@PostMapping(value = "/adoptions", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<StatusResponse> saveAdoption(Adoption adoption){
-//		return ResponseEntity.ok(new StatusResponse(true, "Oker"));
-//		
-//	}
-	
-	//create new adoption
+
+	// create new adoption
 	@PostMapping(value = "/adoption", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Adoption> createAdoption(@RequestBody Adoption adoption) {
 		return ResponseEntity.ok(adoptionService.saveAdoption(adoption));
 	}
-	
+
+//	@GetMapping(value = "/getadoption", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<List<Adoption>> getall() {
+//		return ResponseEntity.ok(adoptionService.getAdoption());
+//	}
+
 	@GetMapping(value = "/getadoption", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Adoption> getAdoption(){
+	public List<Adoption> getAdoption() {
 		return adoptionService.getAdoption();
 	}
-	
-	//update adoption
+
+	// update adoption
 	@PutMapping(value = "/adoption/{adoptionId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Adoption updateAdoption(@PathVariable Long adoptionId, @RequestBody Adoption adoption) {
-			
+
 		adoption.setAdoptionId(adoptionId);
-		
-		
+
 		return adoptionService.updateAdoption(adoption);
 	}
-	
+
 	@GetMapping(value = "/getadoption/{adoptionId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Adoption getAdoption(@PathVariable Long adoptionId) {
-		
+
 		Adoption adoption = adoptionService.getSingleAdoption(adoptionId);
-		
+
 		if (adoption == null) {
 			ResponseEntity.notFound().build();
 		}
-		
+
 		return adoption;
 	}
-	
+
 	@DeleteMapping(value = "/deleteAdoption", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void deleteAdoption(@RequestParam Long adoptionId) {
 		adoptionService.deleteAdoption(adoptionId);
 	}
-	
-	
-	//
-	
-//	@GetMapping(value = "/search/{fullName}", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<List<Adopter>> searchAdoptions(@RequestParam("fullName") @PathVariable String fullName){
-//		return ResponseEntity.ok(adoptionService.searchAdoption(fullName));
-//	}
-//	
-//	@GetMapping(value = "/getNameSearch/{fullName}", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public List<Adopter> getNameSearch(@PathVariable String fullName) {
-//		
-//		List<Adopter> adopters = adoptionService.searchName(fullName);
-//		
-//		
-//		return adopters;
-//	}
+
 }

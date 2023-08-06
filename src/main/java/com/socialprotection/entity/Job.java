@@ -1,16 +1,12 @@
 package com.socialprotection.entity;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,12 +23,22 @@ public class Job {
 	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Employee> employees;
-	
-	
+
 	@Column(name = "job_title")
 	private String jobTitle;
-	
-	
+
+	@Column(name = "job_description", columnDefinition = "TEXT")
+	private String jobDescription;
+
+	public Job() {
+		super();
+	}
+
+	public Job(String jobTitle, String jobDescription) {
+		super();
+		this.jobTitle = jobTitle;
+		this.jobDescription = jobDescription;
+	}
 
 	public long getJobId() {
 		return jobId;
@@ -41,8 +47,6 @@ public class Job {
 	public void setJobId(long jobId) {
 		this.jobId = jobId;
 	}
-
-	
 
 	public List<Employee> getEmployees() {
 		return employees;
@@ -60,21 +64,12 @@ public class Job {
 		this.jobTitle = jobTitle;
 	}
 
-	
-
-	public Job(String jobTitle) {
-		super();
-		this.jobTitle = jobTitle;
+	public String getJobDescription() {
+		return jobDescription;
 	}
 
-	public Job() {
-		super();
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
 	}
-
-	
-
-	
-	
-	
 
 }

@@ -15,5 +15,10 @@ public interface ChildrenService {
 	public ChildrenStatus saveChildrenStatus(ChildrenStatus childrenStatus);
 
 //	Select children
-	public List<Children> fildAll();
+	public List<Children> findAll();
+
+	public Children findById(long id);
+
+	public void deleteChildrenById(long id);
+
 }

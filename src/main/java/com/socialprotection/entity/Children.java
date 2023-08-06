@@ -78,7 +78,7 @@ public class Children extends Person {
 
 	@OneToMany(mappedBy = "children")
 	@JsonIgnore
-	private List<Adoption> adoptions = new ArrayList<>();
+	private List<Adoption> adoptions;
 
 	@OneToOne(mappedBy = "children")
 	@JsonIgnore

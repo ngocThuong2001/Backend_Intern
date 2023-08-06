@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "incomes")
 public class Income {
@@ -21,11 +23,11 @@ public class Income {
 	@Column(name = "income_id")
 	private long incomeId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "budget_id")
 	private Budget budget;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bank_account_id")
 	private BankAccount bankAccount;
 	
@@ -38,6 +40,7 @@ public class Income {
 	@Column(name = "amount")
 	private float amount;
 	
+	@JsonFormat(pattern="dd-MM-yyyy")
 	@Column(name = "date_time")
 	private Date dateTime;
 	
@@ -54,6 +57,14 @@ public class Income {
 		this.incomeDescription = incomeDescription;
 		this.amount = amount;
 		this.dateTime = dateTime;
+	}
+	
+	public long getIncomeId() {
+		return incomeId;
+	}
+
+	public void setIncomeId(long incomeId) {
+		this.incomeId = incomeId;
 	}
 
 	public Budget getBudget() {

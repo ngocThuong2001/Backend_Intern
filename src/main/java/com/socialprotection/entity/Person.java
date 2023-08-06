@@ -99,4 +99,10 @@ public class Person {
 		this.nationality = nationality;
 	}
 
+	@Override
+	public String toString() {
+		return "Person [fullName=" + fullName + ", firstName=" + firstName + ", lastName=" + lastName + ", gender="
+				+ gender + ", nationality=" + nationality + ", addressPermanent=" + addressPermanent
+				+ ", addressTemporary=" + addressTemporary + "]";
+	}
 }

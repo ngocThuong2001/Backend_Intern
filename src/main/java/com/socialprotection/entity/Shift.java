@@ -1,5 +1,6 @@
 package com.socialprotection.entity;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 

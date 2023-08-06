@@ -5,11 +5,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name = "budgets")
@@ -29,14 +34,20 @@ public class Budget {
 	@Column(name = "amount")
 	private float amout;
 
+	@JsonFormat(pattern="dd-MM-yyyy")
 	@Column(name = "start_date")
 	private Date startDate;
 
+	@JsonFormat(pattern="dd-MM-yyyy")
 	@Column(name = "end_date")
 	private Date endDate;
 
-	@OneToMany(mappedBy = "budget")
+	@JsonIgnore
+	@OneToMany(mappedBy = "budget", fetch = FetchType.LAZY)
 	private List<Donation> donations;
+
+	@OneToMany(mappedBy = "budget", fetch = FetchType.LAZY)
+	private List<Income> incomes;
 
 	public Budget() {
 		super();
@@ -49,6 +60,26 @@ public class Budget {
 		this.amout = amout;
 		this.startDate = startDate;
 		this.endDate = endDate;
+	}
+
+	public long getBudgetId() {
+		return budgetId;
+	}
+
+	public void setBudgetId(long budgetId) {
+		this.budgetId = budgetId;
+	}
+
+	public List<Donation> getDonations() {
+		return donations;
+	}
+
+	public void setDonations(List<Donation> donations) {
+		this.donations = donations;
+	}
+
+	public void setAmout(float amout) {
+		this.amout = amout;
 	}
 
 	public String getBudgetName() {

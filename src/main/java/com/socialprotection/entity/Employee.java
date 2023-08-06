@@ -1,7 +1,6 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "employees")
 public class Employee extends Person {
@@ -29,43 +31,68 @@ public class Employee extends Person {
 	@JoinColumn(name = "image_id")
 	private Image image;
 
-	@Column(name = "phone_number")
-	private char phoneNumber;
+	@Column(name = "phone_number", columnDefinition = "char(10)")
+	private String phoneNumber;
 
 	private String email;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@Column(name = "birthday")
+	private Date birthDay;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "from_date")
 	private Date fromDate;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "to_date")
 	private Date toDate;
 
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "job_id")
 	private Job job;
-	
-	
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "employee")
 	private List<Children> children;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "empSalary")
 	private List<Salary> salaries;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "empAct")
 	private Activity activity;
 
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "shift_id")
 	private Shift shift;
-	
-	
 
-	
+	public Date getBirthDay() {
+		return birthDay;
+	}
 
-	
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public Employee(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, Image image, String phoneNumber, String email,
+			Date birthDay, Date fromDate, Date toDate, Job job, List<Salary> salaries) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.image = image;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.birthDay = birthDay;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.job = job;
+		this.salaries = salaries;
+	}
+
+	public Employee() {
+		super();
+	}
 
 	public Shift getShift() {
 		return shift;
@@ -107,11 +134,11 @@ public class Employee extends Person {
 		this.image = image;
 	}
 
-	public char getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(char phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -122,8 +149,6 @@ public class Employee extends Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	
 
 	public Job getJob() {
 		return job;
@@ -159,22 +184,6 @@ public class Employee extends Person {
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
-	}
-
-	
-
-	public Employee(String fullName, String firstName, String lastName, String gender, String nationality,
-			String addressPermanent, String addressTemporary, char phoneNumber, String email, Date fromDate,
-			Date toDate) {
-		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-	}
-
-	public Employee() {
-		super();
 	}
 
 }
