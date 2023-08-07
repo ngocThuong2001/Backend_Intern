@@ -41,10 +41,10 @@ public class AdoptionController {
 		return ResponseEntity.ok(adoptionService.saveAdoption(adoption));
 	}
 
-	@GetMapping(value = "/getadoption")
-	public ResponseEntity<List<Adoption>> getall() {
-		return ResponseEntity.ok(adoptionService.getAdoption());
-	}
+//	@GetMapping(value = "/getadoption", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<List<Adoption>> getall() {
+//		return ResponseEntity.ok(adoptionService.getAdoption());
+//	}
 
 	@GetMapping(value = "/getadoption", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Adoption> getAdoption() {

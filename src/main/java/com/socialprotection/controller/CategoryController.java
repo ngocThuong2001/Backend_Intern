@@ -1,7 +1,5 @@
 package com.socialprotection.controller;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,30 +14,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.socialprotection.entity.Guardian;
-import com.socialprotection.service.GuardianService;
+import com.socialprotection.entity.Category;
+import com.socialprotection.service.CategoryService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/guardians")
-public class GuardianController {
+@RequestMapping("/api/categories")
+public class CategoryController {
 	
 	@Autowired
-	private GuardianService guardianService;
+	private CategoryService categoryService;
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Guardian> saveGuardian(@RequestBody Guardian guardian) {
-		return ResponseEntity.ok(guardianService.save(guardian));
-	}
+	public ResponseEntity<Category> createCategory(@RequestBody Category category) {
+		return ResponseEntity.ok(categoryService.saveCategory(category));
+	} 
 	
 	@GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Guardian> guardians(){
-		return guardianService.getGuardians();
+	public List<Category> getCategory(){
+		return categoryService.getCategory();
 	}
 	
-	@DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-		public void deleteeGuardian(@RequestParam Long guardianID) {
-			guardianService.deleteGuardian(guardianID);
-		}
-	
+	@DeleteMapping(value = "/deleteCategory", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void deleteCategory(@RequestParam Long categoryId) {
+		categoryService.deleteCategory(categoryId);
+	}
+
 }

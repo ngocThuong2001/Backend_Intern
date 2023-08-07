@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "articles")
 public class Article {
@@ -28,6 +30,7 @@ public class Article {
 	@Column(name = "content", columnDefinition = "TEXT")
 	private String content;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "post_date")
 	private Date postDate;
 
