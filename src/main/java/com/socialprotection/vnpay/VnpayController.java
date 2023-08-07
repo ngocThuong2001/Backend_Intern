@@ -112,7 +112,7 @@ public class VnpayController {
 		queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
 		String paymentUrl = VnpayConfig.vnp_PayUrl + "?" + queryUrl;
 
-		System.out.println(queryUrl);
+		System.out.println(paymentUrl);
 		response.setHeader("Location", paymentUrl);
 		response.setStatus(302);
 

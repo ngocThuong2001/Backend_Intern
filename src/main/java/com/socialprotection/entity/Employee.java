@@ -3,6 +3,7 @@ package com.socialprotection.entity;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,6 +37,9 @@ public class Employee extends Person {
 
 	private String email;
 
+	@Column(name = "salary")
+	private float salary;
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "birthday")
 	private Date birthDay;
@@ -57,16 +61,31 @@ public class Employee extends Person {
 	private List<Children> children;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empSalary")
-	private List<Salary> salaries;
-
-	@JsonIgnore
 	@OneToOne(mappedBy = "empAct")
 	private Activity activity;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "shift_id")
 	private Shift shift;
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "citizen_id")
+	private CitizenIdentification citizenId;
+
+	public Employee(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, Image image, String phoneNumber, String email,
+			float salary, Date birthDay, Date fromDate, Date toDate, Job job, Shift shift) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.image = image;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.salary = salary;
+		this.birthDay = birthDay;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.job = job;
+		this.shift = shift;
+	}
 
 	public Date getBirthDay() {
 		return birthDay;
@@ -76,18 +95,12 @@ public class Employee extends Person {
 		this.birthDay = birthDay;
 	}
 
-	public Employee(String fullName, String firstName, String lastName, String gender, String nationality,
-			String addressPermanent, String addressTemporary, Image image, String phoneNumber, String email,
-			Date birthDay, Date fromDate, Date toDate, Job job, List<Salary> salaries) {
-		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
-		this.image = image;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.birthDay = birthDay;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-		this.job = job;
-		this.salaries = salaries;
+	public float getSalary() {
+		return salary;
+	}
+
+	public void setSalary(float salary) {
+		this.salary = salary;
 	}
 
 	public Employee() {
@@ -108,14 +121,6 @@ public class Employee extends Person {
 
 	public void setActivity(Activity activity) {
 		this.activity = activity;
-	}
-
-	public List<Salary> getSalaries() {
-		return salaries;
-	}
-
-	public void setSalaries(List<Salary> salaries) {
-		this.salaries = salaries;
 	}
 
 	public long getEmployeeId() {
@@ -186,4 +191,13 @@ public class Employee extends Person {
 		this.toDate = toDate;
 	}
 
+	public CitizenIdentification getCitizenId() {
+		return citizenId;
+	}
+
+	public void setCitizenId(CitizenIdentification citizenId) {
+		this.citizenId = citizenId;
+	}
+	
+	
 }

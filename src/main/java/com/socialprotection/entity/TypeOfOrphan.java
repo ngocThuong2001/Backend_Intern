@@ -24,7 +24,7 @@ public class TypeOfOrphan {
 	private String orphanTypeName;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "typeOfOrphans")
+	@OneToMany(mappedBy = "typeOfOrphan")
 	private List<Children> children;
 
 	@Column(name = "description", columnDefinition = "TEXT")

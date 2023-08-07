@@ -1,5 +1,7 @@
 package com.socialprotection.service;
 
-public interface CitizenIdentificationService {
+import com.socialprotection.entity.CitizenIdentification;
 
+public interface CitizenIdentificationService {
+	public CitizenIdentification save(CitizenIdentification citizenId);
 }

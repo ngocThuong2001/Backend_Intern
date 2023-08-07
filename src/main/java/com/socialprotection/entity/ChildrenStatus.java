@@ -38,6 +38,10 @@ public class ChildrenStatus {
 		this.description = description;
 	}
 
+	public ChildrenStatus(long id) {
+		super();
+		this.childStatusId = id;
+	}
 	public ChildrenStatus() {
 		super();
 	}

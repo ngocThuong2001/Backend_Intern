@@ -41,13 +41,17 @@ public class Children extends Person {
 	@JoinColumn(name = "image_id")
 	private Image image;
 
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "guardian_id")
+	private Guardian guardian;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orphan_type_id")
-	private TypeOfOrphan typeOfOrphans;
+	private TypeOfOrphan typeOfOrphan;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "child_status_id")
@@ -84,18 +88,57 @@ public class Children extends Person {
 	@JsonIgnore
 	private AdoptionHistory adoptionHistory;
 
-	@OneToMany(mappedBy = "children")
-	@JsonIgnore
-	private List<Guardian> guardians;
+//	@OneToMany(mappedBy = "children")
+//	@JsonIgnore
+//	private List<Guardian> guardians;
 
-	
+	@Column(name = "circumstance", columnDefinition = "TEXT")
+	private String circumstance;
 
-	public List<Guardian> getGuardians() {
-		return guardians;
+	public Children(Date birthDay, Image image, Employee employeeChild, TypeOfOrphan typeOfOrphan,
+			ChildrenStatus childrenStatus, CitizenIdentification citizenId, Date dateIn, Date dateOut,
+			Set<Activity> activities, List<Adoption> adoptions, AdoptionHistory adoptionHistory) {
+		super();
+		this.birthDay = birthDay;
+		this.image = image;
+		this.employee = employeeChild;
+		this.typeOfOrphan = typeOfOrphan;
+		this.childrenStatus = childrenStatus;
+		this.citizenId = citizenId;
+		this.dateIn = dateIn;
+		this.dateOut = dateOut;
+		this.activities = activities;
+		this.adoptions = adoptions;
+		this.adoptionHistory = adoptionHistory;
 	}
 
-	public void setGuardians(List<Guardian> guardians) {
-		this.guardians = guardians;
+	public Children(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, Date birthDay, Image image, Employee employee,
+			TypeOfOrphan typeOfOrphan, ChildrenStatus childrenStatus, Date dateIn, Date dateOut, String circumstance) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.birthDay = birthDay;
+		this.image = image;
+		this.employee = employee;
+		this.typeOfOrphan = typeOfOrphan;
+		this.childrenStatus = childrenStatus;
+		this.dateIn = dateIn;
+		this.dateOut = dateOut;
+		this.circumstance = circumstance;
+	}
+
+	public Children(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, Date birthDay, Image image, TypeOfOrphan typeOfOrphan,
+			Date dateIn, String circumstance) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.birthDay = birthDay;
+		this.image = image;
+		this.typeOfOrphan = typeOfOrphan;
+		this.dateIn = dateIn;
+		this.circumstance = circumstance;
+	}
+
+	public Children() {
+		super();
 	}
 
 	public AdoptionHistory getAdoptionHistory() {
@@ -154,12 +197,12 @@ public class Children extends Person {
 		this.employee = employee;
 	}
 
-	public TypeOfOrphan getTypeOfOrphans() {
-		return typeOfOrphans;
+	public TypeOfOrphan getTypeOfOrphan() {
+		return typeOfOrphan;
 	}
 
-	public void setTypeOfOrphans(TypeOfOrphan typeOfOrphans) {
-		this.typeOfOrphans = typeOfOrphans;
+	public void setTypeOfOrphan(TypeOfOrphan typeOfOrphan) {
+		this.typeOfOrphan = typeOfOrphan;
 	}
 
 	public ChildrenStatus getChildrenStatus() {
@@ -202,25 +245,20 @@ public class Children extends Person {
 		this.medicalRecords = medicalRecords;
 	}
 
-	public Children(Date birthDay, Image image, Employee employeeChild, TypeOfOrphan typeOfOrphans,
-			ChildrenStatus childrenStatus, CitizenIdentification citizenId, Date dateIn, Date dateOut,
-			Set<Activity> activities, List<Adoption> adoptions, AdoptionHistory adoptionHistory) {
-		super();
-		this.birthDay = birthDay;
-		this.image = image;
-		this.employee = employeeChild;
-		this.typeOfOrphans = typeOfOrphans;
-		this.childrenStatus = childrenStatus;
-		this.citizenId = citizenId;
-		this.dateIn = dateIn;
-		this.dateOut = dateOut;
-		this.activities = activities;
-		this.adoptions = adoptions;
-		this.adoptionHistory = adoptionHistory;
+	public String getCircumstance() {
+		return circumstance;
 	}
 
-	public Children() {
-		super();
+	public void setCircumstance(String circumstance) {
+		this.circumstance = circumstance;
+	}
+
+	public Guardian getGuardian() {
+		return guardian;
+	}
+
+	public void setGuardian(Guardian guardian) {
+		this.guardian = guardian;
 	}
 
 }
