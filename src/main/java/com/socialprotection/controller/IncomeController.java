@@ -42,10 +42,8 @@ public class IncomeController {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Income> addBudget(@RequestBody Income income) {
 		try {
-			Income _income = new Income(income.getBudget(), income.getBankAccount(), income.getIncomeName(), income.getIncomeDescription(), income.getAmount(),
-					income.getDateTime());
-			incomeservice.save(_income);
-			return ResponseEntity.ok(_income);
+			incomeservice.save(income);
+			return ResponseEntity.ok(income);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR_500).body(null);
 		}
