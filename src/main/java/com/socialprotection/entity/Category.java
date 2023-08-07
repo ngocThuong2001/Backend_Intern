@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "category")
 @Table(name = "categories")
 public class Category {
@@ -25,6 +27,7 @@ public class Category {
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Article> articles;
 
