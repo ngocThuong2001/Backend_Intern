@@ -19,6 +19,7 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "category_id")
 	private long categoryId;
 
 	@Column(name = "name")
@@ -26,6 +27,9 @@ public class Category {
 
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
+
+	@Column(name = "category_url")
+	private String categoryUrl;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
@@ -41,11 +45,18 @@ public class Category {
 		this.description = description;
 	}
 
-	public long getCategory_id() {
+	public Category(String name, String description, String categoryUrl) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.categoryUrl = categoryUrl;
+	}
+
+	public long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategory_id(long categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -72,6 +83,13 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public String getCategoryUrl() {
+		return categoryUrl;
+	}
+
+	public void setCategoryUrl(String categoryUrl) {
+		this.categoryUrl = categoryUrl;
+	}
 
 }

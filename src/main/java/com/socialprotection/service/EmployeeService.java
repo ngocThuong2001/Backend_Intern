@@ -12,13 +12,17 @@ import com.socialprotection.entity.Shift;
 import com.socialprotection.repository.EmployeeRepository;
 
 public interface EmployeeService {
-	public Employee save(Employee employee);
-	public List<Employee> findAll();
-	public Employee findById(long id);
-	public void deleteEmployeeById(long id);
-	
-	public List<Job> findAllJobs();
-	public List<Shift> findAllShifts();
-	
-	public Employee saveCitizenIdForEmployee(long id, CitizenIdentification citizenId);
+	Employee save(Employee employee);
+
+	List<Employee> findAll();
+
+	Employee findById(long id);
+
+	void deleteEmployeeById(long id);
+
+	List<Job> findAllJobs();
+
+	List<Shift> findAllShifts();
+
+	Employee saveCitizenIdForEmployee(long id, CitizenIdentification citizenId);
 }

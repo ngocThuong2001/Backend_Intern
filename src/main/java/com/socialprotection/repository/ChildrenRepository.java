@@ -12,4 +12,5 @@ import com.socialprotection.entity.Employee;
 public interface ChildrenRepository extends JpaRepository<Children, Long>{
 	List<Children> findByEmployee(Employee employee);
 	List<Children> findByChildrenStatus(ChildrenStatus childrenStatus);
+	long countByChildrenStatus(ChildrenStatus childrenStatus);
 }

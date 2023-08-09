@@ -32,6 +32,12 @@ public class CategoryServiceImpl implements CategoryService{
 		// TODO Auto-generated method stub
 		categoryRepository.delete(categoryId);
 	}
+
+	@Override
+	public Category findById(long id) {
+		// TODO Auto-generated method stub
+		return categoryRepository.findOne(id);
+	}
 	
 	
 	
