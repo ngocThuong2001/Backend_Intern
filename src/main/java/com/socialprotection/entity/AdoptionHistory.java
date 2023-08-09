@@ -25,11 +25,11 @@ public class AdoptionHistory {
 	@Column(name = "adopt_date")
 	private Date adoptDate;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "adopter_id")
 	private Adopter adopter;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "child_id")
 	private Children children;
 

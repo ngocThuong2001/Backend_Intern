@@ -25,13 +25,16 @@ public class Image {
 	private String imageUrl;
 
 	@JsonIgnore
+	@Transient
 	@OneToOne(mappedBy = "image")
 	private Employee employee;
 
 	@JsonIgnore
+	@Transient
 	@OneToOne(mappedBy = "image")
 	private Children children;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "image")
 	private Article article;
 

@@ -19,7 +19,7 @@ public class Job {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "job_id")
 	private long jobId;
-
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "job")
 	private List<Employee> employees;

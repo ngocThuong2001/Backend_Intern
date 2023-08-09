@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "donors")
 public class Donor extends Person {
@@ -22,6 +24,16 @@ public class Donor extends Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "donor_id")
 	private long donorId;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@Column(name = "birthday")
+	private Date birthDay;
+
+	@Column(name = "phone_number", columnDefinition = "char(10)")
+	private String phoneNumber;
+	
+	@Column(name = "email")
+	private String email;
 
 	@Column(name = "account_name")
 	private String accountName;
@@ -41,8 +53,6 @@ public class Donor extends Person {
 	@OneToOne(mappedBy = "donor")
 	private Donation donation;
 
-	
-
 	public long getDonorId() {
 		return donorId;
 	}
@@ -51,8 +61,6 @@ public class Donor extends Person {
 		this.donorId = donorId;
 	}
 
-	
-
 	public Donor() {
 		super();
 	}
@@ -60,6 +68,24 @@ public class Donor extends Person {
 	public Donor(String accountName, String accountNumber, String bankName, String bankCvv, Date expirationDate,
 			Donation donation) {
 		super();
+		this.accountName = accountName;
+		this.accountNumber = accountNumber;
+		this.bankName = bankName;
+		this.bankCvv = bankCvv;
+		this.expirationDate = expirationDate;
+		this.donation = donation;
+	}
+	
+	
+
+	public Donor(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, Date birthDay, String phoneNumber, String email,
+			String accountName, String accountNumber, String bankName, String bankCvv, Date expirationDate,
+			Donation donation) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.birthDay = birthDay;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
 		this.accountName = accountName;
 		this.accountNumber = accountNumber;
 		this.bankName = bankName;
@@ -116,4 +142,12 @@ public class Donor extends Person {
 		this.donation = donation;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString()+" Donor [donorId=" + donorId + ", birthDay=" + birthDay + ", phoneNumber=" + phoneNumber + ", email="
+				+ email + ", accountName=" + accountName + ", accountNumber=" + accountNumber + ", bankName=" + bankName
+				+ ", bankCvv=" + bankCvv + ", expirationDate=" + expirationDate + ", donation=" + donation + "]";
+	}
+
+	
 }

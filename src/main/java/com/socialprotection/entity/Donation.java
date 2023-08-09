@@ -22,11 +22,11 @@ public class Donation {
 	@Column(name = "donation_id")
 	private long donationId;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "donor_id")
 	private Donor donor;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "budget_id")
 	private Budget budget;
 
