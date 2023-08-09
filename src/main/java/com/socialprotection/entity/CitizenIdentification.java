@@ -45,6 +45,10 @@ public class CitizenIdentification {
 	@OneToOne(mappedBy = "citizenIdentification", cascade = CascadeType.ALL)
 	private Adopter adopter;
 
+	@JsonIgnore
+	@OneToOne(mappedBy = "citizenId")
+	private Employee employee;
+
 	public Adopter getAdopter() {
 		return adopter;
 	}
@@ -99,6 +103,14 @@ public class CitizenIdentification {
 
 	public void setChildren(Children children) {
 		this.children = children;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public CitizenIdentification(String citizenIdentNumber, Date issueDate, String issuePlace, Date expireDate,

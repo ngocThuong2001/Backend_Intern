@@ -32,6 +32,9 @@ public class Adoption {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "register_date")
 	private Date registerDate;
+	
+	@Column(name = "reason", columnDefinition = "TEXT")
+	private String reason;
 
 	@Column(name = "status", columnDefinition = "Char(1)")
 	private String status;
@@ -93,10 +96,23 @@ public class Adoption {
 	public void setAdopters(Set<Adopter> adopters) {
 		this.adopters = adopters;
 	}
+	
+	
 
-	public Adoption(Date registerDate, String status) {
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	
+
+	public Adoption(Date registerDate, String reason, String status) {
 		super();
 		this.registerDate = registerDate;
+		this.reason = reason;
 		this.status = status;
 	}
 

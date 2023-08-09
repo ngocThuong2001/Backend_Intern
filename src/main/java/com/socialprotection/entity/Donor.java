@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "donors")
@@ -35,22 +36,8 @@ public class Donor extends Person {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "account_name")
-	private String accountName;
-
-	@Column(name = "account_number")
-	private String accountNumber;
-
-	@Column(name = "bank_name")
-	private String bankName;
-
-	@Column(name = "bank_cvv")
-	private String bankCvv;
-
-	@Column(name = "expiration_date")
-	private Date expirationDate;
-
-	@OneToOne(mappedBy = "donor")
+	@JsonIgnore
+	@OneToOne(mappedBy = "donor", fetch = FetchType.LAZY)
 	private Donation donation;
 
 	public long getDonorId() {
@@ -65,73 +52,14 @@ public class Donor extends Person {
 		super();
 	}
 
-	public Donor(String accountName, String accountNumber, String bankName, String bankCvv, Date expirationDate,
-			Donation donation) {
-		super();
-		this.accountName = accountName;
-		this.accountNumber = accountNumber;
-		this.bankName = bankName;
-		this.bankCvv = bankCvv;
-		this.expirationDate = expirationDate;
-		this.donation = donation;
-	}
-	
-	
-
 	public Donor(String fullName, String firstName, String lastName, String gender, String nationality,
 			String addressPermanent, String addressTemporary, Date birthDay, String phoneNumber, String email,
-			String accountName, String accountNumber, String bankName, String bankCvv, Date expirationDate,
 			Donation donation) {
 		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
 		this.birthDay = birthDay;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.accountName = accountName;
-		this.accountNumber = accountNumber;
-		this.bankName = bankName;
-		this.bankCvv = bankCvv;
-		this.expirationDate = expirationDate;
 		this.donation = donation;
-	}
-
-	public String getAccountName() {
-		return accountName;
-	}
-
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
-	}
-
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	public String getBankName() {
-		return bankName;
-	}
-
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
-	}
-
-	public String getBankCvv() {
-		return bankCvv;
-	}
-
-	public void setBankCvv(String bankCvv) {
-		this.bankCvv = bankCvv;
-	}
-
-	public Date getExpirationDate() {
-		return expirationDate;
-	}
-
-	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
 	}
 
 	public Donation getDonation() {
@@ -141,13 +69,33 @@ public class Donor extends Person {
 	public void setDonation(Donation donation) {
 		this.donation = donation;
 	}
+	
+	
 
-	@Override
-	public String toString() {
-		return super.toString()+" Donor [donorId=" + donorId + ", birthDay=" + birthDay + ", phoneNumber=" + phoneNumber + ", email="
-				+ email + ", accountName=" + accountName + ", accountNumber=" + accountNumber + ", bankName=" + bankName
-				+ ", bankCvv=" + bankCvv + ", expirationDate=" + expirationDate + ", donation=" + donation + "]";
+	public Date getBirthDay() {
+		return birthDay;
 	}
+
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 	
 }

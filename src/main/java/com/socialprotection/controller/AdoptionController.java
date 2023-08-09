@@ -33,8 +33,6 @@ public class AdoptionController {
 		return ResponseEntity.ok(adoptionService.saveAdoption(adoption));
 	}
 
-	
-
 	@GetMapping(value = "/getadoption", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Adoption> getAdoption() {
 		return adoptionService.getAdoption();

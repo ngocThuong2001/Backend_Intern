@@ -11,13 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "category")
 @Table(name = "categories")
 public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long category_id;
+	private long categoryId;
 
 	@Column(name = "name")
 	private String name;
@@ -25,6 +27,7 @@ public class Category {
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Article> articles;
 
@@ -39,11 +42,11 @@ public class Category {
 	}
 
 	public long getCategory_id() {
-		return category_id;
+		return categoryId;
 	}
 
-	public void setCategory_id(long category_id) {
-		this.category_id = category_id;
+	public void setCategory_id(long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public List<Article> getArticles() {
@@ -69,5 +72,6 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 
 }

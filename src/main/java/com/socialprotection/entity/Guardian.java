@@ -8,7 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "guardians")
@@ -25,9 +29,27 @@ public class Guardian extends Person {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "child_id", nullable = false)
+	@JsonIgnore
+	@Transient
+	@OneToOne(mappedBy = "guardian")
 	private Children children;
+
+	@Column(name = "relationship_type")
+	private String relationshipType;
+
+	public Guardian() {
+		super();
+	}
+
+	public Guardian(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, String phoneNumber, String email, Children children,
+			String relationshipType) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.children = children;
+		this.relationshipType = relationshipType;
+	}
 
 	public long getGuardianID() {
 		return guardianID;
@@ -61,15 +83,12 @@ public class Guardian extends Person {
 		this.children = children;
 	}
 
-	public Guardian(String phoneNumber, String email, Children children) {
-		super();
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.children = children;
+	public String getRelationshipType() {
+		return relationshipType;
 	}
 
-	public Guardian() {
-		super();
+	public void setRelationshipType(String relationshipType) {
+		this.relationshipType = relationshipType;
 	}
 
 }

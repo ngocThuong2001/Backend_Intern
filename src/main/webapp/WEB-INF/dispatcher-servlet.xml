@@ -22,10 +22,13 @@
 
 	<context:component-scan
 		base-package="com.socialprotection.controller" />
-		<context:component-scan
+	<context:component-scan
 		base-package="com.socialprotection.vnpay" />
-
+	<context:component-scan
+		base-package="com.socialprotection.googledrivestore" />
 	<mvc:annotation-driven />
+
+
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
