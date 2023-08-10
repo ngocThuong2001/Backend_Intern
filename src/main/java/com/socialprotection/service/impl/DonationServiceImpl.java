@@ -44,4 +44,10 @@ public class DonationServiceImpl implements DonationService{
 		return donationRepository.findAll();
 	}
 
+	@Override
+	public float getTotalAmount() {
+		// TODO Auto-generated method stub
+		return donationRepository.getTotalAmount();
+	}
+
 }

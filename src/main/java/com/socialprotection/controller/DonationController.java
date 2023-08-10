@@ -40,8 +40,13 @@ public class DonationController {
 	@GetMapping(value = "/donations", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Donation>> getAllDonations() throws ParseException {
 		List<Donation> donations = donationService.fndAll();
-		
+
 		return ResponseEntity.ok(donations);
+	}
+
+	@GetMapping(value = "/donations/amount", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Float> getAllDonationAmount() throws ParseException {
+		return ResponseEntity.ok(donationService.getTotalAmount());
 	}
 
 	@PostMapping(value = "/donations/return", produces = MediaType.APPLICATION_JSON_VALUE)

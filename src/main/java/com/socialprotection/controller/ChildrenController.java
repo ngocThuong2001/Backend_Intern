@@ -76,10 +76,8 @@ public class ChildrenController {
 
 	@PostMapping(value = "/children/image", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> saveImage(@RequestPart("image") MultipartFile file) {
-		System.out.println(file.getOriginalFilename());
 		File googleFile = googleDriveService.uploadFile(file);
 		String image_url = googleFile.getWebContentLink();
-		System.out.println(image_url);
 		return null;
 	}
 
@@ -87,8 +85,6 @@ public class ChildrenController {
 	public ResponseEntity<Object> saveChildren(@RequestPart("children") ChildrenRequest childrenRequest,
 			@RequestPart("image") MultipartFile file) {
 		String fileName = file.getOriginalFilename();
-		System.out.println(fileName);
-		System.out.println(childrenRequest.toString());
 		try {
 			Children children = new Children();
 //			String imageUrl = storageService.save(file);
@@ -118,7 +114,7 @@ public class ChildrenController {
 		return ResponseEntity.ok(null);
 	}
 
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/children/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Children> getChildrenById(@PathVariable("id") long id) {
 		return ResponseEntity.ok(childrenService.findById(id));
 	}
@@ -128,7 +124,7 @@ public class ChildrenController {
 		return ResponseEntity.ok(childrenService.findByEmployee(id));
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/children/{id}")
 	public ResponseEntity<HttpStatus> deleteChildrenById(@PathVariable("id") long id) {
 		try {
 			childrenService.deleteChildrenById(id);
@@ -142,7 +138,6 @@ public class ChildrenController {
 	public ResponseEntity<HttpStatus> saveChildCitizenId(@PathVariable("id") long id,
 			@RequestBody CitizenIdentification citizenId) {
 		try {
-			System.out.println(childrenService.saveCitizenIdForChild(id, citizenId));
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -152,7 +147,6 @@ public class ChildrenController {
 	@PostMapping("children/{id}/guardian")
 	public ResponseEntity<HttpStatus> saveChildGuardian(@PathVariable("id") long id, @RequestBody Guardian guardian) {
 		try {
-			System.out.println(childrenService.saveGuardianForChild(id, guardian));
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -164,7 +158,6 @@ public class ChildrenController {
 	public ResponseEntity<HttpStatus> saveChildEmployee(@PathVariable("childId") long childId,
 			@PathVariable("employeeId") long employeeId) {
 		try {
-			System.out.println(childrenService.saveEmployeeForChild(childId, employeeId));
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
