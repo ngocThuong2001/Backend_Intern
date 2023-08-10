@@ -3,12 +3,17 @@ package com.socialprotection.service;
 import java.util.List;
 
 import com.socialprotection.entity.Article;
+import com.socialprotection.entity.Category;
 
 public interface ArticleService {
-	public Article saveArticle(Article article);
-	
-	public List<Article> getArticles();
-	
-	public void deleteArticle(Long articalId);
+	Article saveArticle(Article article);
+
+	List<Article> getArticles(Integer limit);
+
+	Article findById(long id);
+
+	List<Article> getArticlesByCategory(Category category);
+
+	void deleteArticle(Long articalId);
 
 }

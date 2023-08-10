@@ -10,25 +10,27 @@ import com.socialprotection.entity.Guardian;
 import com.socialprotection.entity.TypeOfOrphan;
 
 public interface ChildrenService {
-//	Save children
-	public Children save(Children children);
+//	Select
+	List<Children> findAll();
 
-	public TypeOfOrphan saveTypeOrphan(TypeOfOrphan typeOfOrphan);
+	List<Children> findByEmployee(long id);
 
-	public ChildrenStatus saveChildrenStatus(ChildrenStatus childrenStatus);
+	List<Children> findByStatus(String status);
 
-//	Select children
-	public List<Children> findAll();
-
-	public List<Children> findByEmployee(long id);
-
-	public Children findById(long id);
-
-	public void deleteChildrenById(long id);
+	Children findById(long id);
 
 	List<TypeOfOrphan> findAllTypeOrphan();
 
 	List<ChildrenStatus> findAllChildrenStatus();
+
+	long countChildren( String status);
+
+//	Save
+	Children save(Children children);
+
+	TypeOfOrphan saveTypeOrphan(TypeOfOrphan typeOfOrphan);
+
+	ChildrenStatus saveChildrenStatus(ChildrenStatus childrenStatus);
 
 	Children saveCitizenIdForChild(long id, CitizenIdentification citizenId);
 
@@ -36,5 +38,6 @@ public interface ChildrenService {
 
 	Children saveEmployeeForChild(long childId, long employeeId);
 
-	List<Children> findByStatus(String status);
+//	Delete
+	void deleteChildrenById(long id);
 }

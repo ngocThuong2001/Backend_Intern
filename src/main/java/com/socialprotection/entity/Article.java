@@ -21,14 +21,17 @@ public class Article {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "artical_id")
-	private long articalId;
+	@Column(name = "article_id")
+	private long articleId;
 
 	@Column(name = "title")
 	private String title;
 
 	@Column(name = "content", columnDefinition = "TEXT")
 	private String content;
+
+	@Column(name = "article_url")
+	private String articleUrl;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@Column(name = "post_date")
@@ -60,12 +63,24 @@ public class Article {
 		this.category = category;
 	}
 
-	public long getArticalId() {
-		return articalId;
+	public Article(String title, String content, String articleUrl, Date postDate, User user, Image image,
+			Category category) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.articleUrl = articleUrl;
+		this.postDate = postDate;
+		this.user = user;
+		this.image = image;
+		this.category = category;
 	}
 
-	public void setArticalId(long articalId) {
-		this.articalId = articalId;
+	public long getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(long articleId) {
+		this.articleId = articleId;
 	}
 
 	public String getTitle() {
@@ -114,6 +129,14 @@ public class Article {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public String getArticleUrl() {
+		return articleUrl;
+	}
+
+	public void setArticleUrl(String articleUrl) {
+		this.articleUrl = articleUrl;
 	}
 
 }

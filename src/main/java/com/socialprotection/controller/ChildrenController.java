@@ -48,31 +48,30 @@ public class ChildrenController {
 	@Autowired
 	private GoogleDriveService googleDriveService;
 
-//	@GetMapping(value = "/children", produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<List<Children>> getAllChildren() {
-//		return ResponseEntity.ok(childrenService.findAll());
-//	}
-	
-	@GetMapping(value = "/children",  produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Children>> getChildrenByStatus(@RequestParam(name="status", required = false) String status) {
-		List<Children> children ;
+	@GetMapping(value = "/children", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Children>> getChildrenByStatus(
+			@RequestParam(name = "status", required = false) String status) {
+		List<Children> children;
 		if (status != null) {
 			return ResponseEntity.ok(childrenService.findByStatus(status));
 		} else {
 			return ResponseEntity.ok(childrenService.findAll());
 		}
-		
-		
 	}
 
 	@GetMapping(value = "/children/types", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TypeOfOrphan>> getAllTypeOrphan() {
 		return ResponseEntity.ok(childrenService.findAllTypeOrphan());
 	}
-	
+
 	@GetMapping(value = "/children/status", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ChildrenStatus>> getAllChildrenStatus() {
 		return ResponseEntity.ok(childrenService.findAllChildrenStatus());
+	}
+	
+	@GetMapping(value = "/children/count", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Long> countAllChildren(@RequestParam(name = "status", required = false) String status) {
+		return ResponseEntity.ok(childrenService.countChildren(status));
 	}
 
 	@PostMapping(value = "/children/image", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -123,7 +122,7 @@ public class ChildrenController {
 	public ResponseEntity<Children> getChildrenById(@PathVariable("id") long id) {
 		return ResponseEntity.ok(childrenService.findById(id));
 	}
-	
+
 	@GetMapping(value = "employee/{id}/children", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Children>> getChildrenByEmployee(@PathVariable("id") long id) {
 		return ResponseEntity.ok(childrenService.findByEmployee(id));
@@ -149,10 +148,9 @@ public class ChildrenController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PostMapping("children/{id}/guardian")
-	public ResponseEntity<HttpStatus> saveChildGuardian(@PathVariable("id") long id,
-			@RequestBody Guardian guardian) {
+	public ResponseEntity<HttpStatus> saveChildGuardian(@PathVariable("id") long id, @RequestBody Guardian guardian) {
 		try {
 			System.out.println(childrenService.saveGuardianForChild(id, guardian));
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -161,9 +159,10 @@ public class ChildrenController {
 		}
 
 	}
-	
+
 	@PostMapping("children/{childId}/employee/{employeeId}")
-	public ResponseEntity<HttpStatus> saveChildEmployee(@PathVariable("childId") long childId,@PathVariable("employeeId") long employeeId) {
+	public ResponseEntity<HttpStatus> saveChildEmployee(@PathVariable("childId") long childId,
+			@PathVariable("employeeId") long employeeId) {
 		try {
 			System.out.println(childrenService.saveEmployeeForChild(childId, employeeId));
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

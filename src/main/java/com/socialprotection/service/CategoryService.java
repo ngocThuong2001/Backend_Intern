@@ -10,6 +10,8 @@ public interface CategoryService {
 	
 	public List<Category> getCategory();
 	
+	Category findById(long id);
+	
 	public void deleteCategory(Long categoryId);
 
 }

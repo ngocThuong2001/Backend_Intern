@@ -120,4 +120,15 @@ public class ChildrenServiceImpl implements ChildrenService {
 		// TODO Auto-generated method stub
 		return childrenStatusRepository.findAll();
 	}
+
+	@Override
+	public long countChildren( String status) {
+		// TODO Auto-generated method stub
+//		childrenRepository.
+		if (status != null) {
+			ChildrenStatus childrenStatus = childrenStatusRepository.findByStatus(status).get(0);
+			return childrenRepository.countByChildrenStatus(childrenStatus);
+		}
+		return childrenRepository.count();
+	}
 }

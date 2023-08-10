@@ -52,7 +52,6 @@ public class GoogleDriveConfig {
     }
     
     public static Credential getCredentials() throws IOException {
-    	System.out.println(CLIENT_SECRET_FILE_NAME);
         java.io.File clientSecretFilePath = new java.io.File(CREDENTIALS_FOLDER, CLIENT_SECRET_FILE_NAME);
 
         if (!clientSecretFilePath.exists()) {
