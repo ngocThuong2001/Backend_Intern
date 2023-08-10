@@ -47,6 +47,9 @@ public class DonationServiceImpl implements DonationService{
 	@Override
 	public float getTotalAmount() {
 		// TODO Auto-generated method stub
+		if (donationRepository.getTotalAmount() == null) {
+			return 0;
+		}
 		return donationRepository.getTotalAmount();
 	}
 
