@@ -9,6 +9,7 @@ import com.socialprotection.entity.Children;
 import com.socialprotection.entity.CitizenIdentification;
 import com.socialprotection.entity.Employee;
 import com.socialprotection.entity.Job;
+import com.socialprotection.entity.Person;
 import com.socialprotection.entity.Shift;
 import com.socialprotection.repository.CitizenIdentificationRepository;
 import com.socialprotection.repository.EmployeeRepository;
@@ -73,5 +74,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setCitizenId(citizenIdSaved);
 		return employeeRepository.save(employee);
 	}
+
+//	@Override
+//	public List<Employee> findByFullname(String fullName) {
+//		// TODO Auto-generated method stub
+//		return employeeRepository.findByFullname(fullName);
+//	}
 
 }

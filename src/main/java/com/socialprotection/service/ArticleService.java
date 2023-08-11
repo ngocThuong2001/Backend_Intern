@@ -16,4 +16,6 @@ public interface ArticleService {
 
 	void deleteArticle(Long articalId);
 
+	
+	List<Article> getArticleByTitle(String title);
 }

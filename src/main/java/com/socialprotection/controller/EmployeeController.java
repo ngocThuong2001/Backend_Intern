@@ -23,8 +23,10 @@ import com.socialprotection.entity.CitizenIdentification;
 import com.socialprotection.entity.Employee;
 import com.socialprotection.entity.Image;
 import com.socialprotection.entity.Job;
+import com.socialprotection.entity.Person;
 import com.socialprotection.entity.Shift;
 import com.socialprotection.googledrivestore.GoogleDriveService;
+import com.socialprotection.repository.EmployeeRepository;
 import com.socialprotection.request.ChildrenRequest;
 import com.socialprotection.request.EmployeeRequest;
 import com.socialprotection.service.EmployeeService;
@@ -36,6 +38,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	@Autowired
 	private GoogleDriveService googleDriveService;
@@ -122,5 +127,12 @@ public class EmployeeController {
 	public ResponseEntity<List<Shift>> getAllShifts() {
 		return ResponseEntity.ok(employeeService.findAllShifts());
 	}
+	
+//	@GetMapping(value = "/employees/{fullName}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<List<Employee>> getEmployeeByName(@PathVariable("fullName") String fullName){
+////		Person person = new Person();
+////		person.setFullName(fullName);
+//		return ResponseEntity.ok(employeeRepository.findByFullname(fullName));
+//	}
 	
 }

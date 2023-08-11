@@ -9,4 +9,7 @@ import com.socialprotection.entity.Category;
 
 public interface ArticleRepository extends JpaRepository<Article, Long>{
 	List<Article> findByCategory(Category category);
+	
+	
+	List<Article> findByTitle(String title);
 }

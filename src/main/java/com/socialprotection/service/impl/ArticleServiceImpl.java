@@ -57,4 +57,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleRepository.findByCategory(category);
 	}
 
+	@Override
+	public List<Article> getArticleByTitle(String title) {
+		// TODO Auto-generated method stub
+		return articleRepository.findByTitle(title);
+	}
+
 }

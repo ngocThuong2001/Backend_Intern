@@ -76,5 +76,10 @@ public class ArticleController {
 	public void deleteArticle(@RequestParam Long articleId) {
 		articleService.deleteArticle(articleId);
 	}
+	
+	@GetMapping(value = "/articles/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Article>> getArticleByTitle(@PathVariable("title") String title){
+		return ResponseEntity.ok(articleService.getArticleByTitle(title));
+	}
 
 }
