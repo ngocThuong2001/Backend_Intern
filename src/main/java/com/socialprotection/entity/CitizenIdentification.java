@@ -26,14 +26,14 @@ public class CitizenIdentification {
 	@Column(name = "citizen_ident_number", columnDefinition = "Char(12)")
 	private String citizenIdentNumber;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "issue_date")
 	private Date issueDate;
 
 	@Column(name = "issue_place")
 	private String issuePlace;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "expire_date")
 	private Date expireDate;
 

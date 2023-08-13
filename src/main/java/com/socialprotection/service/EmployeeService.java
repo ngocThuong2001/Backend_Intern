@@ -16,9 +16,13 @@ public interface EmployeeService {
 
 	List<Employee> findAll();
 
+	List<Employee> findByJob(Job job);
+
 	Employee findById(long id);
 
 	void deleteEmployeeById(long id);
+
+	Job findJobByTitle(String title);
 
 	List<Job> findAllJobs();
 

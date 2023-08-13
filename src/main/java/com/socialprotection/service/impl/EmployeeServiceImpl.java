@@ -74,4 +74,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.save(employee);
 	}
 
+	@Override
+	public List<Employee> findByJob(Job job) {
+		// TODO Auto-generated method stub
+		return employeeRepository.findByJob(job);
+	}
+
+	@Override
+	public Job findJobByTitle(String title) {
+		// TODO Auto-generated method stub
+		return jobRepository.findByJobTitle(title).get(0);
+	}
+
 }

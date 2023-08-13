@@ -49,6 +49,12 @@ public class EmployeeController {
 	public ResponseEntity<List<Employee>> getAll() {
 		return ResponseEntity.ok(employeeService.findAll());
 	}
+	
+	@GetMapping(value = "job/{job-title}/employees", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Employee>> getAll(@PathVariable("job-title") String title) {
+		Job job = employeeService.findJobByTitle(title);
+		return ResponseEntity.ok(employeeService.findByJob(job));
+	}
 
 //	@PostMapping(value = "/employees", produces = MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {

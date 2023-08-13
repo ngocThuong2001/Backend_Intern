@@ -79,4 +79,10 @@ public class Image {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return "Image [imageId=" + imageId + ", imageUrl=" + imageUrl + ", employee=" + employee + ", children="
+				+ children + ", article=" + article + "]";
+	}
+	
 }

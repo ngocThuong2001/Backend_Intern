@@ -40,15 +40,15 @@ public class Employee extends Person {
 	@Column(name = "salary")
 	private float salary;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "birthday")
 	private Date birthDay;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "from_date")
 	private Date fromDate;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "to_date")
 	private Date toDate;
 

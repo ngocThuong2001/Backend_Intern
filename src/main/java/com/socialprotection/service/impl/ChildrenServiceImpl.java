@@ -3,6 +3,10 @@ package com.socialprotection.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.socialprotection.entity.Children;
 import com.socialprotection.entity.ChildrenStatus;
@@ -31,10 +35,10 @@ public class ChildrenServiceImpl implements ChildrenService {
 
 	@Autowired
 	private ImageRepository imageRepository;
-	
+
 	@Autowired
 	private GuardianRepository guardianRepository;
-	
+
 	@Autowired
 	private CitizenIdentificationRepository citizenIdRepository;
 
@@ -95,9 +99,19 @@ public class ChildrenServiceImpl implements ChildrenService {
 	public Children saveEmployeeForChild(long childId, long employeeId) {
 		Employee employee = new Employee();
 		employee.setEmployeeId(employeeId);
-		
+
 		Children child = childrenRepository.findOne(childId);
 		child.setEmployee(employee);
+		return childrenRepository.save(child);
+	}
+
+	@Override
+	public Children saveStatusForChild(long childId, long statusId) {
+		ChildrenStatus status = new ChildrenStatus();
+		status.setChildStatusId(statusId);
+
+		Children child = childrenRepository.findOne(childId);
+		child.setChildrenStatus(status);
 		return childrenRepository.save(child);
 	}
 
@@ -110,9 +124,35 @@ public class ChildrenServiceImpl implements ChildrenService {
 	}
 
 	@Override
-	public List<Children> findByStatus(String status) {
-		ChildrenStatus childrenStatus = childrenStatusRepository.findByStatus(status).get(0);
-		return childrenRepository.findByChildrenStatus(childrenStatus);
+	public Page<Children> findByStatus(String status, Integer limit, Integer page, String sortBy, String sortDirec) {
+		List<ChildrenStatus> childrenStatusList = childrenStatusRepository.findByStatus(status);
+		if (childrenStatusList.size() > 0) {
+			ChildrenStatus childrenStatus = childrenStatusList.get(0);
+			Pageable pageable = null;
+			Sort sortDesc = null;
+			if (limit != null && page != null) {
+				if (sortBy != null && sortDirec != null) {
+					sortDesc = new Sort(Sort.Direction.fromString(sortDirec), sortBy);
+				}
+				pageable = new PageRequest(page, limit, sortDesc);
+			}
+			return childrenRepository.findByChildrenStatus(childrenStatus, pageable);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public Page<Children> findByName(String name, Integer limit, Integer page, String sortBy, String sortDirec) {
+		Pageable pageable = null;
+		Sort sortDesc = null;
+		if (limit != null && page != null) {
+			if (sortBy != null && sortDirec != null) {
+				sortDesc = new Sort(Sort.Direction.fromString(sortDirec), sortBy);
+			}
+			pageable = new PageRequest(page, limit, sortDesc);
+		}
+		return childrenRepository.findByName(name, pageable);
 	}
 
 	@Override
@@ -122,7 +162,7 @@ public class ChildrenServiceImpl implements ChildrenService {
 	}
 
 	@Override
-	public long countChildren( String status) {
+	public long countChildren(String status) {
 		// TODO Auto-generated method stub
 //		childrenRepository.
 		if (status != null) {
@@ -130,5 +170,28 @@ public class ChildrenServiceImpl implements ChildrenService {
 			return childrenRepository.countByChildrenStatus(childrenStatus);
 		}
 		return childrenRepository.count();
+	}
+
+	@Override
+	public Page<Children> getAllChildrenPagin(Integer limit, Integer page, String sortBy, String sortDirec) {
+		Pageable pageable = null;
+		Sort sortDesc = null;
+		if (limit != null && page != null) {
+			if (sortBy != null && sortDirec != null) {
+				sortDesc = new Sort(Sort.Direction.fromString(sortDirec), sortBy);
+			}
+			pageable = new PageRequest(page, limit, sortDesc);
+		}
+		Page<Children> pageChildren = childrenRepository.findAll(pageable);
+		return pageChildren;
+	}
+
+	@Override
+	public Children update(Children children) {
+		if (children.getGuardian() != null) {
+			guardianRepository.save(children.getGuardian());
+		}
+		imageRepository.save(children.getImage());
+		return childrenRepository.save(children);
 	}
 }

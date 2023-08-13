@@ -1,7 +1,6 @@
 package com.socialprotection.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class Children extends Person {
 	@Column(name = "child_id")
 	private long childId;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "birthday")
 	private Date birthDay;
 
@@ -65,7 +64,7 @@ public class Children extends Person {
 	@JsonIgnore
 	private List<MedicalRecord> medicalRecords;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "date_in")
 	private Date dateIn;
 
@@ -259,6 +258,15 @@ public class Children extends Person {
 
 	public void setGuardian(Guardian guardian) {
 		this.guardian = guardian;
+	}
+
+	@Override
+	public String toString() {
+		return "Children [childId=" + childId + ", birthDay=" + birthDay + ", image=" + image + ", guardian=" + guardian
+				+ ", employee=" + employee + ", typeOfOrphan=" + typeOfOrphan + ", childrenStatus=" + childrenStatus
+				+ ", citizenId=" + citizenId + ", medicalRecords=" + medicalRecords + ", dateIn=" + dateIn
+				+ ", dateOut=" + dateOut + ", activities=" + activities + ", adoptions=" + adoptions
+				+ ", adoptionHistory=" + adoptionHistory + ", circumstance=" + circumstance + "]";
 	}
 
 }
