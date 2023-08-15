@@ -12,10 +12,10 @@ import com.socialprotection.entity.Donation;
 
 public interface DonationRepository extends JpaRepository<Donation, Long> {
 	@Query(value = "SELECT SUM(amount) FROM Donations", nativeQuery = true)
-<<<<<<< HEAD
+
 	Float getTotalAmount();
-=======
-	float getTotalAmount();
+
+	//float getTotalAmount();
 	
 	@Query(value = "SELECT * FROM Donations WHERE EXTRACT(year FROM donate_time) = ?1", nativeQuery = true)
 	List<Donation> getDonationByYear(Integer year);
@@ -37,5 +37,5 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 	
 	@Query(value = "SELECT dt FROM Donations dt WHERE donate_time BETWEEN ?1 AND ?2")
 	Page<Donation> getDonationsByTime(Timestamp dateStart, Timestamp dateEnd, Pageable pageable);
->>>>>>> branch 'master' of https://github.com/Nbtrien/social-protection-center-api.git
+
 }

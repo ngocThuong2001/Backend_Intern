@@ -51,13 +51,11 @@ public class DonationServiceImpl implements DonationService {
 
 	@Override
 	public float getTotalAmount() {
-<<<<<<< HEAD
+
 		// TODO Auto-generated method stub
 		if (donationRepository.getTotalAmount() == null) {
 			return 0;
 		}
-=======
->>>>>>> branch 'master' of https://github.com/Nbtrien/social-protection-center-api.git
 		return donationRepository.getTotalAmount();
 	}
 

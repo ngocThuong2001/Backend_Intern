@@ -75,13 +75,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.save(employee);
 	}
 
-<<<<<<< HEAD
+
 //	@Override
 //	public List<Employee> findByKeywords(String fullName) {
 //		// TODO Auto-generated method stub
 //		return employeeRepository.findByKeywords(fullName);
 //	}
-=======
+
 	@Override
 	public List<Employee> findByJob(Job job) {
 		// TODO Auto-generated method stub
@@ -93,6 +93,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 		// TODO Auto-generated method stub
 		return jobRepository.findByJobTitle(title).get(0);
 	}
->>>>>>> branch 'master' of https://github.com/Nbtrien/social-protection-center-api.git
 
 }
