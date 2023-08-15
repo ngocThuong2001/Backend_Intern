@@ -3,6 +3,8 @@ package com.socialprotection.controller;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.annotation.MultipartConfig;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,8 @@ import com.socialprotection.service.ArticleService;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
+@MultipartConfig(location = "/tmp", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024
+* 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class ArticleController {
 	
 	@Autowired
@@ -38,7 +42,7 @@ public class ArticleController {
 	
 	@PostMapping(value = "/articles",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> saveArticle(@RequestPart("article") ArticleRequest request,
-			@RequestPart("image") MultipartFile file){
+			@RequestPart("image") MultipartFile file) throws Exception{
 		Article article = new Article();
 		article.setCategory(request.getCategory());
 		article.setContent(request.getContent());

@@ -76,9 +76,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 //	@Override
-//	public List<Employee> findByFullname(String fullName) {
+//	public List<Employee> findByKeywords(String fullName) {
 //		// TODO Auto-generated method stub
-//		return employeeRepository.findByFullname(fullName);
+//		return employeeRepository.findByKeywords(fullName);
 //	}
 
 }

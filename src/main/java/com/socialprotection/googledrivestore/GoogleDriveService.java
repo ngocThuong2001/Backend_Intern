@@ -23,7 +23,7 @@ import com.google.api.services.drive.model.FileList;
 
 @Service
 public class GoogleDriveService {
-	private static String FOLDER_ID = "1r651PVOMwyQS23oQtuL5VZwT-iUhhOdI";
+	private static String FOLDER_ID = "1_7hpMRN6IVat34IDR4PFUbMn7T2CnuAp";
 
 	// PRIVATE!
 	private static File _createGoogleFile(String contentType, //

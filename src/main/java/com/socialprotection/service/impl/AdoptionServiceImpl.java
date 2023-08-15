@@ -28,8 +28,6 @@ public class AdoptionServiceImpl implements AdoptionService {
 	@Override
 	public Adoption saveAdoption(Adoption adoption) {
 
-//		adoption.getAdopters().forEach(pl -> pl.setAdoption(adoption)); 
-
 		Adoption adoption2 = adoptionRepository.save(adoption);
 
 		return adoption2;

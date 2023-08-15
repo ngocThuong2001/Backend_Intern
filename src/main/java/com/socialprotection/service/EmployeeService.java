@@ -27,5 +27,5 @@ public interface EmployeeService {
 
 	Employee saveCitizenIdForEmployee(long id, CitizenIdentification citizenId);
 	
-//	List<Employee> findByFullname(String fullName);
+//	List<Employee> findByKeywords(String fullName);
 }

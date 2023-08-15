@@ -12,7 +12,7 @@ import com.socialprotection.entity.Person;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 
-//	@Query("SELECT e FROM employees e WHERE e.fullName = :fullName")
-//	List<Employee> findByFullname(@Param("fullName") String fullName);
+//	@Query("SELECT e FROM employees e WHERE e.fullName like ?1", nativeQuery = true)
+//	List<Employee> findByKeywords(String fullName);
 	
 }

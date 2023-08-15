@@ -10,4 +10,5 @@ public interface DonationService {
 	Donation saveDonation(Donation donation);
 	List<Donation> fndAll();
 	Donation getDonationById(long id);
+	float getTotalAmount();
 }
