@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.api.services.drive.model.File;
+import com.socialprotection.entity.Adoption;
 import com.socialprotection.entity.Article;
 import com.socialprotection.entity.Category;
 import com.socialprotection.entity.Image;
@@ -84,6 +87,15 @@ public class ArticleController {
 	@GetMapping(value = "/articles/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Article>> getArticleByTitle(@PathVariable("title") String title){
 		return ResponseEntity.ok(articleService.getArticleByTitle(title));
+	}
+	
+	@PutMapping(value = "/articles/{articleId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Article updateAdoption(@PathVariable Long articleId, @RequestBody Article article) {
+
+		article.setArticleId(articleId);
+		
+
+		return articleService.updateArticle(article);
 	}
 
 }

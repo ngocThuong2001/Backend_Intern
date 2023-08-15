@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+@Entity(name = "Donors")
 @Table(name = "donors")
 public class Donor extends Person {
 
@@ -26,13 +26,13 @@ public class Donor extends Person {
 	@Column(name = "donor_id")
 	private long donorId;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "birthday")
 	private Date birthDay;
 
 	@Column(name = "phone_number", columnDefinition = "char(10)")
 	private String phoneNumber;
-	
+
 	@Column(name = "email")
 	private String email;
 
@@ -69,8 +69,6 @@ public class Donor extends Person {
 	public void setDonation(Donation donation) {
 		this.donation = donation;
 	}
-	
-	
 
 	public Date getBirthDay() {
 		return birthDay;
@@ -96,6 +94,10 @@ public class Donor extends Person {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "Donor [donorId=" + donorId + ", birthDay=" + birthDay + ", phoneNumber=" + phoneNumber + ", email="
+				+ email + ", donation=" + donation + "]";
+	}
 
-	
 }

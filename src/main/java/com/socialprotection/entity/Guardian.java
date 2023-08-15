@@ -1,5 +1,7 @@
 package com.socialprotection.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -22,6 +25,10 @@ public class Guardian extends Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "guardian_id")
 	private long guardianID;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  timezone = "Asia/Ho_Chi_Minh")
+	@Column(name = "birthday")
+	private Date birthDay;
 
 	@Column(name = "phone_number", columnDefinition = "Char(10)")
 	private String phoneNumber;
@@ -39,6 +46,16 @@ public class Guardian extends Person {
 
 	public Guardian() {
 		super();
+	}
+
+	public Guardian(String fullName, String firstName, String lastName, String gender, String nationality,
+			String addressPermanent, String addressTemporary, Date birthDay, String phoneNumber, String email,
+			String relationshipType) {
+		super(fullName, firstName, lastName, gender, nationality, addressPermanent, addressTemporary);
+		this.birthDay = birthDay;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.relationshipType = relationshipType;
 	}
 
 	public Guardian(String fullName, String firstName, String lastName, String gender, String nationality,
@@ -91,4 +108,18 @@ public class Guardian extends Person {
 		this.relationshipType = relationshipType;
 	}
 
+	public Date getBirthDay() {
+		return birthDay;
+	}
+
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	@Override
+	public String toString() {
+		return "Guardian [guardianID=" + guardianID + ", birthDay=" + birthDay + ", phoneNumber=" + phoneNumber
+				+ ", email=" + email + ", children=" + children + ", relationshipType=" + relationshipType + "]";
+	}
+	
 }

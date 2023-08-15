@@ -33,7 +33,7 @@ public class Article {
 	@Column(name = "article_url")
 	private String articleUrl;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  timezone = "Asia/Ho_Chi_Minh")
 	@Column(name = "post_date")
 	private Date postDate;
 

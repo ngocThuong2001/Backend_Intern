@@ -63,4 +63,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleRepository.findByTitle(title);
 	}
 
+	@Override
+	public Article updateArticle(Article article) {
+		// TODO Auto-generated method stub
+		return articleRepository.save(article);
+	}
+
 }

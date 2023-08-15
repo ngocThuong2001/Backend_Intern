@@ -18,4 +18,6 @@ public interface ArticleService {
 
 	
 	List<Article> getArticleByTitle(String title);
+	
+	Article updateArticle(Article article);
 }

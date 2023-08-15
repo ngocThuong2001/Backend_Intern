@@ -50,7 +50,7 @@ public class ChildrenStatus {
 		return childStatusId;
 	}
 
-	public void setChildStatusId(int childStatusId) {
+	public void setChildStatusId(long childStatusId) {
 		this.childStatusId = childStatusId;
 	}
 
